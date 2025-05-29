@@ -1,5 +1,60 @@
-ECE1373 Course Project - High Frequency Trading
+Based on: ECE1373 Course Project - High Frequency Trading
 ===============================================
+
+## old project is 8 years old, and was likely made using vivado 2014/2015 based on syntax
+## It was also missing: src/hft_proj, the meat of the project, which ties all the custom IPs together 
+## I maintained the repository, optimized it, removed huge #define <math.h> import overhead, and build custom "glue" to merge the IP's together 
+## running into resource over-utilization, I will truncate the implementation of the order book (biggest part of the project) 
+### and try to move to a bigger  
+
+# My current problem (SEE output.txt):
+
+What Went Wrong
+Your build failed during the implementation phase due to resource over-utilization. This is a common challenge when working with complex FPGA designs on smaller devices. The PYNQ-Z1 board's Zynq-7000 (xc7z020) FPGA is too small for this high-frequency trading system.
+
+Resource Requirements vs. Available
+Resource Type	Required	Available	Utilization
+LUT as Logic	76,712	53,200	144%
+LUT as Memory/RAM	88,722	17,400	510%
+MUXF7/F7 Muxes	39,946	26,600	150%
+RAMD64E	80,528	17,400	463%
+Solution Options
+1. Target a Larger Device
+The most straightforward solution is to use a larger FPGA that can accommodate the design:
+
+2. Reduce Design Complexity
+If you must use the PYNQ-Z1, you'll need to significantly reduce the design:
+
+Reduce Order Book Depth:
+
+Modify the order_book_src/priority_queue.hpp to use smaller data structures
+Limit the maximum number of orders tracked
+Simplify Trading Algorithm:
+
+The order book implementation is consuming most resources
+Consider a simpler pricing algorithm with fewer state variables
+Distribute Processing:
+
+Keep only core trading logic on FPGA
+Move pre/post-processing to the ARM cores
+3. Change Implementation Approach
+You can modify the HLS synthesis directives to optimize for area:
+
+This forces use of Block RAM instead of distributed RAM (LUTs).
+
+Recommended Action
+Based on the extreme resource utilization (5x over limit for some resources), I strongly recommend:
+
+Use a larger FPGA board - The Xilinx UltraScale+ or even ZCU102 would be more appropriate for this HFT design
+
+If stuck with PYNQ-Z1, reduce the design to a minimal proof-of-concept:
+
+Remove the full order book functionality
+Implement only a simple price crossing detector
+Limit to processing 2-4 symbols instead of a full market
+
+
+their summary:
 
 Summary
 -----------------------------
