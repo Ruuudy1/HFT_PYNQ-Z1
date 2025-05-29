@@ -6,13 +6,15 @@
 
 #define NUMBER_OF_VALID_BITS_IN_BYTE	7
 
-#define pow(x,y)  exp(y*log(x))
+// #define pow(x,y)  exp(y*log(x))
 
 #define PRICE_FIELD_EXP_NUM		0
 #define PRICE_FIELD_MAN_NUM		1
 #define SIZE_FIELD_NUM			2
 #define ORDER_ID_FIELD_NUM		3
 #define TYPE_FIELD_NUM			4
+
+static const mantissa_t POW10_DEC8 = 100000000;  // 10^8 | mantissa_t is an ap_int<35>, it easily holds 100 million.
 
 void Fast_Encoder::encode_fast_message(order & decoded_message,
                                        uint64 & first_packet,
@@ -86,7 +88,8 @@ void Fast_Encoder::encode_decimal_from_fix16(fix16 & decoded_fix16,
     encoded_message[exponent_offset] = 0xF8; // exponent is always -8
 
     // encode mantissa
-    mantissa_t mantissa = (float) decoded_fix16 * pow(10, 8);
+    //mantissa_t mantissa = (float) decoded_fix16 * pow(10, 8);
+    mantissa_t mantissa = decoded_fix16 * POW10_DEC8; // scale fixed<16,8> by 10^8 into our 35-bit mantissa
     encode_signed_int(encoded_message, mantissa_offset, mantissa);
 }
 

@@ -10,7 +10,15 @@
 
 #define NUMBER_OF_VALID_BITS_IN_BYTE    7
 
-#define pow(x,y)  exp(y*log(x))
+// #define pow(x,y)  exp(y*log(x))
+
+// fixed-point 10^n lookup (n = 0…3)
+static const fix16 POW10[4] = {
+    (fix16)1.0,  // 10^0
+    (fix16)0.1,  // 10^-1
+    (fix16)0.01, // 10^-2
+    (fix16)0.001 // 10^-3
+};
 
 #define PRICE_FIELD_EXP_NUM     0
 #define PRICE_FIELD_MAN_NUM     1
@@ -29,6 +37,8 @@ void rxPath(stream<axiWord>& lbRxDataIn,
 {
 #pragma HLS PIPELINE II=1
 
+
+
     static enum Rx_State
     {
         PORT_OPEN = 0, PORT_REPLY, READ_FIRST, READ_SECOND, WRITE, FUNC, FUNC_2
@@ -36,6 +46,7 @@ void rxPath(stream<axiWord>& lbRxDataIn,
 
     static ap_uint<32> openPortWaitTime = 100;
     static ap_uint<8> encoded_message[MESSAGE_BUFF_SIZE] = { 0. };
+    #pragma HLS ARRAY_PARTITION variable=encoded_message complete dim=1
     static order temp_order = { 0, 0, 0, 0 };
 #pragma HLS ARRAY_PARTITION variable=encoded_message complete dim=1
 
@@ -101,6 +112,7 @@ void rxPath(stream<axiWord>& lbRxDataIn,
     case FUNC:
         if (true)
         {
+
             uint8 encoded_message[MESSAGE_BUFF_SIZE] = { 0. };
         #pragma HLS ARRAY_PARTITION variable=encoded_message complete dim=1
 
@@ -123,6 +135,8 @@ void rxPath(stream<axiWord>& lbRxDataIn,
 
             // Decode Exponent
             ap_int<7> decoded_exponent = (encoded_message[message_offset++] & 0x7F);
+            // #pragma HLS bind_op variable=decoded_exponent op=uitofp  // force float→int and multiply into DSPs: rahhh.. update DSP not supported in Pynq-z1
+
 
             // Decode Mantissa Field
             ap_uint<21> decoded_mantissa = 0;
@@ -144,9 +158,15 @@ void rxPath(stream<axiWord>& lbRxDataIn,
             decoded_mantissa = (decoded_mantissa << NUMBER_OF_VALID_BITS_IN_BYTE)
                     | (encoded_message[message_offset++] & VALID_DATA);
 
-            float powers_of_ten[4] = { 1, 0.1, 0.01, 0.001};
-            price_buff = decoded_mantissa * (powers_of_ten[(-1 * decoded_exponent)]);
-
+            //float powers_of_ten[4] = { 1, 0.1, 0.01, 0.001};
+            //price_buff = decoded_mantissa * (powers_of_ten[(-1 * decoded_exponent)]);
+            
+            
+            // replace dynamic float table with fixed-point lookup
+            price_buff = decoded_mantissa * POW10[-decoded_exponent];
+            
+            // #pragma HLS bind_op variable=price_buff        op=fmul
+            
             //std::cout << decoded_mantissa << "*10^" << decoded_exponent << std::endl;
 
             /*
@@ -259,8 +279,11 @@ void rxPath(stream<axiWord>& lbRxDataIn,
             decoded_mantissa = (decoded_mantissa << NUMBER_OF_VALID_BITS_IN_BYTE)
                     | (encoded_message[message_offset++] & VALID_DATA);
 
-            float powers_of_ten[4] = { 1, 0.1, 0.01, 0.001};
-            price_buff = decoded_mantissa * (powers_of_ten[(-1 * decoded_exponent)]);
+            //float powers_of_ten[4] = { 1, 0.1, 0.01, 0.001};
+            //price_buff = decoded_mantissa * (powers_of_ten[(-1 * decoded_exponent)]);
+
+            price_buff = decoded_mantissa * POW10[-decoded_exponent];
+
 
             //std::cout << decoded_mantissa << "*10^" << decoded_exponent << std::endl;
 
@@ -355,9 +378,12 @@ void txPath(stream<metadata> &metadata_from_book,
 
             // Run the encoder
             order decoded_message = order_from_book.read();
-            ap_uint<64> first_packet_data;
+
+            ap_uint<64> first_packet_data; 
             ap_uint<64> second_packet_data;
-            std::cout << "here" << std::endl;
+
+
+            // std::cout << "here" << std::endl;
 
             ///////////////////////
             //// ENCODER Start ////
@@ -407,19 +433,20 @@ void txPath(stream<metadata> &metadata_from_book,
                 second_packet_data = (second_packet_data << BYTE)
                         | encoded_message[i + NUM_BYTES_IN_PACKET];
             }
+            // #pragma HLS bind_op variable=first_packet_data op=shl 
 
             ///////////////////////
             //// ENCODER End //////
             ///////////////////////
 
-            std::cout << "here2" << std::endl;
+            // std::cout << "here2" << std::endl;
 
             // Buffer the 128-bit encoded message in two 64-bit packets
             first_packet.data = first_packet_data;
             second_packet.data = second_packet_data;
 
             next_state = WRITE_FIRST;
-            std::cout << "here3" << std::endl;
+            // std::cout << "here3" << std::endl;
         }
         break;
     case WRITE_FIRST:
@@ -490,33 +517,39 @@ void fast_protocol(stream<axiWord>& lbRxDataIn,
 #pragma HLS INTERFACE ap_ctrl_none port=return
 #pragma HLS DATAFLOW
 
-#pragma HLS resource core=AXI4Stream variable=lbRxDataIn           metadata="-bus_bundle lbRxDataIn"
-#pragma HLS resource core=AXI4Stream variable=lbRxMetadataIn       metadata="-bus_bundle lbRxMetadataIn"
-#pragma HLS resource core=AXI4Stream variable=lbRequestPortOpenOut metadata="-bus_bundle lbRequestPortOpenOut"
-#pragma HLS resource core=AXI4Stream variable=lbPortOpenReplyIn    metadata="-bus_bundle lbPortOpenReplyIn"
-#pragma HLS resource core=AXI4Stream variable=lbTxDataOut          metadata="-bus_bundle lbTxDataOut"
-#pragma HLS resource core=AXI4Stream variable=lbTxMetadataOut      metadata="-bus_bundle lbTxMetadataOut"
-#pragma HLS resource core=AXI4Stream variable=lbTxLengthOut        metadata="-bus_bundle lbTxLengthOut"
-#pragma HLS resource core=AXI4Stream variable=tagsIn               metadata="-bus_bundle tagsIn"
-#pragma HLS resource core=AXI4Stream variable=tagsOut              metadata="-bus_bundle tagsOut"
 
-#pragma HLS DATA_PACK variable=lbRxMetadataIn
-#pragma HLS DATA_PACK variable=lbTxMetadataOut
 
-#pragma HLS resource core=AXI4Stream variable=metadata_to_book    //metadata="-bus_bundle metadata_to_book"
-#pragma HLS resource core=AXI4Stream variable=metadata_from_book   //metadata="-bus_bundle metadata_from_book"
+#pragma HLS INTERFACE axis     port=lbRxDataIn   
 
-#pragma HLS resource core=AXI4Stream variable=time_to_book        // metadata="-bus_bundle time_to_book"
-#pragma HLS resource core=AXI4Stream variable=time_from_book      // metadata="-bus_bundle time_from_book"
 
-#pragma HLS RESOURCE core=AXI4Stream variable=order_to_book
-#pragma HLS RESOURCE core=AXI4Stream variable=order_from_book
+#pragma HLS aggregate   variable=lbRxMetadataIn compact=bit
+#pragma HLS INTERFACE   axis port=lbRxMetadataIn
 
-#pragma HLS DATA_PACK variable=metadata_to_book
-#pragma HLS DATA_PACK variable=metadata_from_book
+#pragma HLS INTERFACE axis     port=lbRequestPortOpenOut
+#pragma HLS INTERFACE axis     port=lbPortOpenReplyIn    
+#pragma HLS INTERFACE axis     port=lbTxDataOut      
 
-#pragma HLS DATA_PACK variable=order_to_book      struct_level
-#pragma HLS DATA_PACK variable=order_from_book    struct_level
+#pragma HLS aggregate   variable=lbTxMetadataOut compact=bit
+#pragma HLS INTERFACE   axis port=lbTxMetadataOut
+
+#pragma HLS INTERFACE axis     port=lbTxLengthOut      
+#pragma HLS INTERFACE axis     port=tagsIn              
+#pragma HLS INTERFACE axis     port=tagsOut             
+
+
+
+#pragma HLS INTERFACE axis     port=metadata_to_book   
+#pragma HLS INTERFACE axis     port=metadata_from_book 
+#pragma HLS INTERFACE axis     port=time_to_book      
+#pragma HLS INTERFACE axis     port=time_from_book  
+
+// fold the 'order' struct (59 bits) into a single AXIS word
+#pragma HLS aggregate   variable=order_to_book compact=bit
+#pragma HLS INTERFACE   axis port=order_to_book 
+
+#pragma HLS aggregate   variable=order_from_book compact=bit
+#pragma HLS INTERFACE   axis port=order_from_book
+
 
     rxPath(lbRxDataIn,
            lbRxMetadataIn,

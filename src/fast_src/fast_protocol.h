@@ -2,10 +2,10 @@
 #define FAST_PROTOCOL_H
 
 #include <stdio.h>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <math.h>
+// #include <iostream>
+// #include <fstream>
+// #include <string>
+// #include <math.h> trying this out
 #include <hls_stream.h>
 #include "ap_int.h"
 #include <stdint.h>

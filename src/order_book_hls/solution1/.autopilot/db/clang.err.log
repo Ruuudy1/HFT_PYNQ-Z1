@@ -1,0 +1,16 @@
+order_book_src/priority_queue.cpp:302:9: warning: the pragma is not supported and will be ignored [-Winvalid-hls-pragmas]
+#pragma HLS DATA_PACK variable=order_stream
+        ^
+order_book_src/priority_queue.cpp:303:9: warning: the pragma is not supported and will be ignored [-Winvalid-hls-pragmas]
+#pragma HLS DATA_PACK variable=incoming_meta
+        ^
+order_book_src/priority_queue.cpp:304:9: warning: the pragma is not supported and will be ignored [-Winvalid-hls-pragmas]
+#pragma HLS DATA_PACK variable=outgoing_meta
+        ^
+order_book_src/priority_queue.cpp:305:9: warning: the pragma is not supported and will be ignored [-Winvalid-hls-pragmas]
+#pragma HLS DATA_PACK variable=top_bid
+        ^
+order_book_src/priority_queue.cpp:306:9: warning: the pragma is not supported and will be ignored [-Winvalid-hls-pragmas]
+#pragma HLS DATA_PACK variable=top_ask
+        ^
+5 warnings generated.

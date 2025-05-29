@@ -1,0 +1,103 @@
+{
+    "0": {
+        "name": "order_book",
+        "file": "priority_queue.cpp",
+        "fileloc": "277",
+        "instructions": "14039",
+        "total_instructions": "19571",
+        "calls": "1 4 2 3",
+        "basicblocks": "2056",
+        "loads": {
+            "G": "2070",
+            "L": "44"
+        },
+        "stores": {
+            "G": "4698",
+            "L": "46"
+        },
+        "loops": {
+            "L": "4",
+            "N": "2"
+        }
+    },
+    "1": {
+        "name": "order_book_Pipeline_BID_PUSH_LOOP",
+        "file": "order_book_src\/priority_queue.cpp",
+        "fileloc": "366",
+        "instructions": "1432",
+        "total_instructions": "1432",
+        "calls": "",
+        "basicblocks": "143",
+        "loads": {
+            "G": "308",
+            "L": "183"
+        },
+        "stores": {
+            "G": "352",
+            "L": "17"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "2": {
+        "name": "order_book_Pipeline_ASK_PUSH_LOOP",
+        "file": "order_book_src\/priority_queue.cpp",
+        "fileloc": "366",
+        "instructions": "1334",
+        "total_instructions": "1334",
+        "calls": "",
+        "basicblocks": "142",
+        "loads": {
+            "G": "264",
+            "L": "183"
+        },
+        "stores": {
+            "G": "352",
+            "L": "17"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "3": {
+        "name": "order_book_Pipeline_ASK_PUSH_LOOP2",
+        "file": "order_book_src\/priority_queue.cpp",
+        "fileloc": "366",
+        "instructions": "1334",
+        "total_instructions": "1334",
+        "calls": "",
+        "basicblocks": "142",
+        "loads": {
+            "G": "264",
+            "L": "183"
+        },
+        "stores": {
+            "G": "352",
+            "L": "17"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "4": {
+        "name": "order_book_Pipeline_BID_PUSH_LOOP1",
+        "file": "order_book_src\/priority_queue.cpp",
+        "fileloc": "366",
+        "instructions": "1432",
+        "total_instructions": "1432",
+        "calls": "",
+        "basicblocks": "143",
+        "loads": {
+            "G": "308",
+            "L": "183"
+        },
+        "stores": {
+            "G": "352",
+            "L": "17"
+        },
+        "loops": {
+            "L": "1"
+        }
+    }
+}

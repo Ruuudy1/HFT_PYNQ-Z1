@@ -1,0 +1,170 @@
+{
+  "0": {
+    "basicblocks": 75,
+    "calls": "6 7 7 7 7 7 7 6 1 5 5 5 5 5 5 1",
+    "file": "priority_queue.cpp",
+    "fileloc": 277,
+    "instructions": 371,
+    "loads": {
+      "G": 34,
+      "L": 10
+    },
+    "name": "order_book",
+    "stores": {
+      "G": 4,
+      "L": 36,
+      "T": 2
+    },
+    "total_instructions": 5545
+  },
+  "1": {
+    "basicblocks": 23,
+    "calls": "10 11 9",
+    "file": "priority_queue.cpp",
+    "fileloc": 162,
+    "instructions": 141,
+    "loads": {
+      "L": 13
+    },
+    "name": "add_ask",
+    "stores": {
+      "L": 9
+    },
+    "total_instructions": 289
+  },
+  "10": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "priority_queue.cpp",
+    "fileloc": 5,
+    "instructions": 6,
+    "name": "log_base_2",
+    "total_instructions": 11
+  },
+  "11": {
+    "basicblocks": 4,
+    "calls": "8",
+    "file": "priority_queue.cpp",
+    "fileloc": 15,
+    "instructions": 16,
+    "loads": {
+      "L": 4
+    },
+    "name": "find_path",
+    "stores": {
+      "L": 1
+    },
+    "total_instructions": 18
+  },
+  "12": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "priority_queue.hpp",
+    "fileloc": 15,
+    "instructions": 4097,
+    "name": "__cxx_global_var_init.1",
+    "total_instructions": 73729
+  },
+  "2": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "priority_queue.cpp",
+    "fileloc": 38,
+    "instructions": 10,
+    "loads": {
+      "L": 1
+    },
+    "name": "right_child",
+    "stores": {
+      "L": 1
+    },
+    "total_instructions": 10
+  },
+  "3": {
+    "basicblocks": 1,
+    "calls": "12",
+    "file": "priority_queue.pp.0.cpp",
+    "fileloc": 0,
+    "instructions": 2,
+    "name": "",
+    "total_instructions": 73731
+  },
+  "4": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "priority_queue.cpp",
+    "fileloc": 33,
+    "instructions": 9,
+    "loads": {
+      "L": 1
+    },
+    "name": "left_child",
+    "stores": {
+      "L": 1
+    },
+    "total_instructions": 9
+  },
+  "5": {
+    "basicblocks": 16,
+    "calls": "4 2 4 2",
+    "file": "priority_queue.cpp",
+    "fileloc": 226,
+    "instructions": 140,
+    "loads": {
+      "L": 10
+    },
+    "name": "remove_ask",
+    "stores": {
+      "L": 10
+    },
+    "total_instructions": 334
+  },
+  "6": {
+    "basicblocks": 21,
+    "calls": "10 11 9",
+    "file": "priority_queue.cpp",
+    "fileloc": 45,
+    "instructions": 127,
+    "loads": {
+      "L": 13
+    },
+    "name": "add_bid",
+    "stores": {
+      "L": 9
+    },
+    "total_instructions": 225
+  },
+  "7": {
+    "basicblocks": 13,
+    "calls": "4 2 4 2",
+    "file": "priority_queue.cpp",
+    "fileloc": 110,
+    "instructions": 128,
+    "loads": {
+      "L": 10
+    },
+    "name": "remove_bid",
+    "stores": {
+      "L": 10
+    },
+    "total_instructions": 245
+  },
+  "8": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "priority_queue.cpp",
+    "fileloc": 10,
+    "instructions": 2,
+    "name": "pow2",
+    "total_instructions": 2
+  },
+  "9": {
+    "basicblocks": 4,
+    "calls": "",
+    "file": "priority_queue.cpp",
+    "fileloc": 27,
+    "instructions": 11,
+    "name": "calculate_index",
+    "total_instructions": 11
+  }
+}

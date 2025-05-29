@@ -1,0 +1,18 @@
+{
+  "0": {
+    "basicblocks": 2704,
+    "calls": "",
+    "file": "priority_queue.cpp",
+    "fileloc": 277,
+    "instructions": 26967,
+    "loads": {
+      "G": 3342
+    },
+    "name": "order_book",
+    "stores": {
+      "G": 6252,
+      "T": 6
+    },
+    "total_instructions": 26967
+  }
+}

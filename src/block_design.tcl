@@ -41,9 +41,11 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 # project, but make sure you do not have an existing project
 # <./hft_proj/hft_proj.xpr> in the current working folder.
 
+# changed it to pynqz1 part
+
 set list_projs [get_projects -quiet]
 if { $list_projs eq "" } {
-   create_project hft_proj hft_proj -part xcku115-flva1517-2-e
+   create_project hft_proj hft_proj -part xc7z020-clg484-1
 }
 
 

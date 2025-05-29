@@ -4,6 +4,15 @@
 #define VALID_DATA	0x7F
 #define SIGN_BIT	0x40
 
+
+// fixed-point 10^n lookup for 4-entry table
+static const fix16 POW10_DEC4[4] = {
+    (fix16)1.0,
+    (fix16)0.1,
+    (fix16)0.01,
+    (fix16)0.001
+};
+
 #define NUMBER_OF_VALID_BITS_IN_BYTE	7
 
 void Fast_Decoder::decode_fast_message(uint64 & first_packet,
@@ -54,8 +63,12 @@ void Fast_Decoder::decode_fast_message(uint64 & first_packet,
     decoded_mantissa = (decoded_mantissa << NUMBER_OF_VALID_BITS_IN_BYTE)
             | (encoded_message[message_offset++] & VALID_DATA);
 
-    float powers_of_ten[4] = { 1, 0.1, 0.01, 0.001};
-    price_buff = decoded_mantissa * (powers_of_ten[(-1 * decoded_exponent)]);
+    //float powers_of_ten[4] = { 1, 0.1, 0.01, 0.001};
+    //price_buff = decoded_mantissa * (powers_of_ten[(-1 * decoded_exponent)]);
+
+    // use fixed-point lookup instead of float exp/log
+    price_buff = decoded_mantissa * POW10_DEC4[-decoded_exponent];
+
 
     //std::cout << decoded_mantissa << "*10^" << decoded_exponent << std::endl;
 
@@ -117,14 +130,27 @@ void Fast_Decoder::decode_decimal_to_fix16(uint8 encoded_message[MESSAGE_BUFF_SI
                                            unsigned & message_offset,
                                            fix16 & decoded_fix16)
 {
-    float powers_of_ten[8] = { 0.1,
-                               0.01,
-                               0.001,
-                               0.0001,
-                               0.00001,
-                               0.000001,
-                               0.0000001,
-                               0.00000001 };
+    // float powers_of_ten[8] = { 0.1,
+    //                            0.01,
+    //                            0.001,
+    //                            0.0001,
+    //                            0.00001,
+    //                            0.000001,
+    //                            0.0000001,
+    //                            0.00000001 };
+
+// fixed-point 10^(-n-1) lookup for up to 8 exponents
+static const fix16 POW10_DEC8[8] = {
+    (fix16)0.1,       // 10^-1
+    (fix16)0.01,      // 10^-2
+    (fix16)0.001,     // 10^-3
+    (fix16)0.0001,    // 10^-4
+    (fix16)0.00001,   // 10^-5
+    (fix16)0.000001,  // 10^-6
+    (fix16)0.0000001, // 10^-7
+    (fix16)0.00000001 // 10^-8
+};
+
     /*
      * Decode Exponent Field
      */
@@ -179,15 +205,20 @@ void Fast_Decoder::decode_decimal_to_fix16(uint8 encoded_message[MESSAGE_BUFF_SI
 
     //cout << decoded_mantissa << "*10^" << decoded_exponent << endl;
 
+    // if (decoded_exponent < 0)
+    // {
+    //     decoded_fix16 = decoded_mantissa
+    //             * (powers_of_ten[(-1 * decoded_exponent) - 1]);
+    // }
+    // else
+    // {
+    //     decoded_fix16 = decoded_mantissa;
+    // }
+
     if (decoded_exponent < 0)
-    {
-        decoded_fix16 = decoded_mantissa
-                * (powers_of_ten[(-1 * decoded_exponent) - 1]);
-    }
+        decoded_fix16 = decoded_mantissa * POW10_DEC8[(-decoded_exponent) - 1];
     else
-    {
         decoded_fix16 = decoded_mantissa;
-    }
 
 }
 

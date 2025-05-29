@@ -1,5 +1,7 @@
+// priority_queue.cpp
 #include "priority_queue.hpp"
 
+//— simple inlines for heap math
 int log_base_2(unsigned index){
 #pragma HLS INLINE
     return log_rom[index];
@@ -12,24 +14,20 @@ int pow2(int level){
 
 int find_path(unsigned& counter, int& hole_counter, int hole_idx[CAPACITY], int level){
 #pragma HLS INLINE
-    if(hole_counter > 0){
-        int temp = hole_idx[hole_counter];
-        hole_counter--;
+    if (hole_counter > 0) {
+        int temp = hole_idx[--hole_counter];
         return temp;
-    }
-    else {
+    } else {
         int leaf_node = pow2(level);
         return counter - leaf_node;
     }
 }
 
+
 unsigned calculate_index(int insert_path, int level, int idx){
 #pragma HLS INLINE
-    unsigned temp = (insert_path >> level) & 1;
-    if(temp == 0)
-        return 2*idx;
-    else
-        return (2*idx)+1;
+    bool bit = (insert_path >> level) & 1;
+    return bit ? (2*idx + 1) : (2*idx);
 }
 
 order left_child(unsigned level, unsigned index, order queue[LEVELS][CAPACITY/2]){
@@ -39,23 +37,27 @@ order left_child(unsigned level, unsigned index, order queue[LEVELS][CAPACITY/2]
 
 order right_child(unsigned level, unsigned index, order queue[LEVELS][CAPACITY/2]){
 #pragma HLS INLINE
-    return queue[level+1][(index*2) + 1];
+    return queue[level+1][index*2 + 1];
 }
 
 
+//— add / remove implementations (DEPENDENCE + PIPELINE)
 void add_bid(order heap[LEVELS][CAPACITY/2],
              order &new_order,
              unsigned& heap_counter,
              int& hole_counter,
              int hole_idx[CAPACITY],
              int hole_lvl[CAPACITY],
-             stream<order> &top_bid,
-             stream<order> &top_ask,
-             stream<Time> &outgoing_time,
-             stream<metadata> &outgoing_meta,
-             ap_uint<32> &top_bid_id,
-             ap_uint<32> &top_ask_id,
-             Time t, metadata m, order ask, bool w)
+             hls::stream<order>    &top_bid,
+             hls::stream<order>    &top_ask,
+             hls::stream<Time>     &outgoing_time,
+             hls::stream<metadata> &outgoing_meta,
+             ap_uint<32>           &top_bid_id,
+             ap_uint<32>           &top_ask_id,
+             Time                  t,
+             metadata              m,
+             order                 ask,
+             bool                  write_flag)
 {
 #pragma HLS INLINE
     heap_counter++;
@@ -68,7 +70,8 @@ void add_bid(order heap[LEVELS][CAPACITY/2],
     unsigned idx = 1;
     unsigned level = 0;
     unsigned new_idx = 0;
-    if(w == true){
+    
+    if(write_flag == true){
         top_ask.write(ask);
         top_ask_id = ask.orderID;
         outgoing_time.write(t);
@@ -162,13 +165,16 @@ void add_ask(order heap[LEVELS][CAPACITY/2],
              int& hole_counter,
              int hole_idx[CAPACITY],
              int hole_lvl[CAPACITY],
-             stream<order> &top_bid,
-             stream<order> &top_ask,
-             stream<Time> &outgoing_time,
-             stream<metadata> &outgoing_meta,
+             hls::stream<order> &top_bid,
+             hls::stream<order> &top_ask,
+             hls::stream<Time> &outgoing_time,
+             hls::stream<metadata> &outgoing_meta,
              ap_uint<32> &top_bid_id,
              ap_uint<32> &top_ask_id,
-             Time t, metadata m, order bid, bool w)
+             Time t, 
+             metadata m, 
+             order bid, 
+             bool write_flag)
 {
 #pragma HLS INLINE
     heap_counter++;
@@ -182,7 +188,7 @@ void add_ask(order heap[LEVELS][CAPACITY/2],
     unsigned level = 0;
     unsigned new_idx = 0;
 
-    if(w == true){
+    if(write_flag == true){
         top_bid.write(bid);
         top_bid_id = bid.orderID;
         outgoing_time.write(t);
@@ -268,74 +274,95 @@ void remove_ask(order heap[LEVELS][CAPACITY/2],
     }
 }
 
-void order_book(stream<order> &order_stream,
-                stream<Time> &incoming_time,
-                stream<metadata> &incoming_meta,
-                stream<order> &top_bid,
-                stream<order> &top_ask,
-                stream<Time> &outgoing_time,
-                stream<metadata> &outgoing_meta,
-                ap_uint<32> &top_bid_id,
-                ap_uint<32> &top_ask_id)
+void order_book(hls::stream<order>    &order_stream,
+                hls::stream<Time>     &incoming_time,
+                hls::stream<metadata> &incoming_meta,
+                hls::stream<order>    &top_bid,
+                hls::stream<order>    &top_ask,
+                hls::stream<Time>     &outgoing_time,
+                hls::stream<metadata> &outgoing_meta,
+                ap_uint<32>           &top_bid_id,
+                ap_uint<32>           &top_ask_id)
 {
+    //— control & AXI-Lite
 #pragma HLS INTERFACE s_axilite port=top_ask_id
 #pragma HLS INTERFACE s_axilite port=top_bid_id
-#pragma HLS INTERFACE axis register port=order_stream
-#pragma HLS INTERFACE axis register port=incoming_time
-#pragma HLS INTERFACE axis register port=incoming_meta
-#pragma HLS INTERFACE axis register port=top_bid
-#pragma HLS INTERFACE axis register port=top_ask
-#pragma HLS INTERFACE axis register port=outgoing_time
-#pragma HLS INTERFACE axis register port=outgoing_meta
 #pragma HLS INTERFACE ap_ctrl_none port=return
 
-#pragma HLS DATA_PACK variable=order_stream struct_level
-#pragma HLS DATA_PACK variable=top_bid struct_level
-#pragma HLS DATA_PACK variable=top_ask struct_level
+    //— AXI-Stream ports (register both sides)
+#pragma HLS INTERFACE axis register both port=order_stream
+#pragma HLS INTERFACE axis register both port=incoming_time
+#pragma HLS INTERFACE axis register both port=incoming_meta
+#pragma HLS INTERFACE axis register both port=top_bid
+#pragma HLS INTERFACE axis register both port=top_ask
+#pragma HLS INTERFACE axis register both port=outgoing_time
+#pragma HLS INTERFACE axis register both port=outgoing_meta
+
+    //— pack structs on TDATA
+#pragma HLS DATA_PACK variable=order_stream
 #pragma HLS DATA_PACK variable=incoming_meta
 #pragma HLS DATA_PACK variable=outgoing_meta
+#pragma HLS DATA_PACK variable=top_bid
+#pragma HLS DATA_PACK variable=top_ask
 
-    static order dummy_bid; dummy_bid.price = 0; dummy_bid.orderID = 0; dummy_bid.direction = 0; dummy_bid.size = 0;
-    static order dummy_ask; dummy_ask.price = 255; dummy_ask.orderID = 0; dummy_ask.direction = 0; dummy_ask.size = 0;
+    //— pipeline the whole function
+#pragma HLS PIPELINE II=1
 
-    static order bid [LEVELS][CAPACITY/2];
-#pragma HLS DATA_PACK variable=bid struct_level
-#pragma HLS ARRAY_PARTITION variable=bid cyclic factor=4 dim=2
+    //— dummy orders
+    static order dummy_bid = {0,0,0,0};
+    static order dummy_ask = {(ap_fixed<16,8>)255,0,0,0};
+
+    //— the four static heaps
+    static order bid[LEVELS][CAPACITY/2];
 #pragma HLS ARRAY_PARTITION variable=bid complete dim=1
+#pragma HLS ARRAY_PARTITION variable=bid cyclic factor=4 dim=2
+#pragma HLS DEPENDENCE variable=bid inter false
+
+    static order ask[LEVELS][CAPACITY/2];
+#pragma HLS ARRAY_PARTITION variable=ask complete dim=1
+#pragma HLS ARRAY_PARTITION variable=ask cyclic factor=4 dim=2
+#pragma HLS DEPENDENCE variable=ask inter false
+
+    static order bid_remove[LEVELS][CAPACITY/2];
+#pragma HLS ARRAY_PARTITION variable=bid_remove complete dim=1
+#pragma HLS ARRAY_PARTITION variable=bid_remove cyclic factor=4 dim=2
+#pragma HLS DEPENDENCE variable=bid_remove inter false
+
+    static order ask_remove[LEVELS][CAPACITY/2];
+#pragma HLS ARRAY_PARTITION variable=ask_remove complete dim=1
+#pragma HLS ARRAY_PARTITION variable=ask_remove cyclic factor=4 dim=2
+#pragma HLS DEPENDENCE variable=ask_remove inter false
+
+    //— counters & holes
     static unsigned counter_bid = 0;
     static int hole_counter_bid = 0;
-    static int hole_idx_bid [CAPACITY];
-    static int hole_lvl_bid [CAPACITY];
+    static int hole_idx_bid[CAPACITY];
+    static int hole_lvl_bid[CAPACITY];
 
-    static order ask [LEVELS][CAPACITY/2];
-#pragma HLS DATA_PACK variable=ask struct_level
-#pragma HLS ARRAY_PARTITION variable=ask cyclic factor=4 dim=2
-#pragma HLS ARRAY_PARTITION variable=ask complete dim=1
     static unsigned counter_ask = 0;
     static int hole_counter_ask = 0;
-    static int hole_idx_ask [CAPACITY];
-    static int hole_lvl_ask [CAPACITY];
+    static int hole_idx_ask[CAPACITY];
+    static int hole_lvl_ask[CAPACITY];
 
-    static order bid_remove [LEVELS][CAPACITY/2];
-#pragma HLS DATA_PACK variable=bid_remove struct_level
-#pragma HLS ARRAY_PARTITION variable=bid_remove cyclic factor=4 dim=2
-#pragma HLS ARRAY_PARTITION variable=bid_remove complete dim=1
     static unsigned counter_bid_remove = 0;
     static int hole_counter_bid_remove = 0;
-    static int hole_idx_bid_remove [CAPACITY];
-    static int hole_lvl_bid_remove [CAPACITY];
+    static int hole_idx_bid_remove[CAPACITY];
+    static int hole_lvl_bid_remove[CAPACITY];
 
-    static order ask_remove [LEVELS][CAPACITY/2];
-#pragma HLS DATA_PACK variable=ask_remove struct_level
-#pragma HLS ARRAY_PARTITION variable=ask_remove cyclic factor=4 dim=2
-#pragma HLS ARRAY_PARTITION variable=ask_remove complete dim=1
     static unsigned counter_ask_remove = 0;
     static int hole_counter_ask_remove = 0;
-    static int hole_idx_ask_remove [CAPACITY];
-    static int hole_lvl_ask_remove [CAPACITY];
+    static int hole_idx_ask_remove[CAPACITY];
+    static int hole_lvl_ask_remove[CAPACITY];
 
-    if(!order_stream.empty() && !incoming_time.empty() && !incoming_meta.empty() &&
-        !top_bid.full() && !top_ask.full() && !outgoing_time.full() && !outgoing_meta.full()){
+    //— main FSM: read one order, update heaps, push out top levels
+    if (!order_stream.empty() &&
+        !incoming_time.empty() &&
+        !incoming_meta.empty() &&
+        !top_bid.full() && 
+        !top_ask.full() && 
+        !outgoing_time.full() && 
+        !outgoing_meta.full())
+    {
         order input = order_stream.read();
         Time time_buffer = incoming_time.read();
         metadata meta_buffer = incoming_meta.read();
@@ -437,9 +464,9 @@ void order_book(stream<order> &order_stream,
             //Otherwise, add the incoming order to the remove heap
             else{
                 add_ask(ask_remove, input, counter_ask_remove, hole_counter_ask_remove, hole_idx_ask_remove,
-                         hole_lvl_ask_remove, top_bid,
-                         top_ask, outgoing_time, outgoing_meta, top_bid_id, top_ask_id,
-                         time_buffer, meta_buffer, ask[0][0], false);
+                        hole_lvl_ask_remove, top_bid,
+                        top_ask, outgoing_time, outgoing_meta, top_bid_id, top_ask_id,
+                        time_buffer, meta_buffer, ask[0][0], false);
             }
         }
 

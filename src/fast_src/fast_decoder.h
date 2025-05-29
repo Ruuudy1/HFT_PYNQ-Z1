@@ -5,7 +5,7 @@
 
 #define STRING_SIZE			10
 
-#define pow(x,y)  exp(y*log(x))
+// #define pow(x,y)  exp(y*log(x))
 
 class Fast_Decoder
 {

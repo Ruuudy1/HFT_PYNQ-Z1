@@ -1,67 +1,71 @@
 #include "simpleThreshold.hpp"
 
-void simple_threshold(stream<order> &top_bid,
-				stream<order> &top_ask,
-				stream<Time> &incoming_time,
-				stream<metadata> &incoming_meta,
-				stream<order> &outgoing_order,
-				stream<Time> &outgoing_time,
-				stream<metadata> &outgoing_meta)
+void simple_threshold(
+    hls::stream<order>    &top_bid,
+    hls::stream<order>    &top_ask,
+    hls::stream<Time>     &incoming_time,
+    hls::stream<metadata> &incoming_meta,
+    hls::stream<order>    &outgoing_order,
+    hls::stream<Time>     &outgoing_time,
+    hls::stream<metadata> &outgoing_meta)
 {
-#pragma HLS RESOURCE core=AXI4Stream variable=top_bid
-#pragma HLS RESOURCE core=AXI4Stream variable=top_ask
-#pragma HLS RESOURCE core=AXI4Stream variable=incoming_time
-#pragma HLS RESOURCE core=AXI4Stream variable=incoming_meta
-#pragma HLS RESOURCE core=AXI4Stream variable=outgoing_order
-#pragma HLS RESOURCE core=AXI4Stream variable=outgoing_time
-#pragma HLS RESOURCE core=AXI4Stream variable=outgoing_meta
+    // ——— Control port: no ap_ctrl handshake ————————————————————————
+    #pragma HLS INTERFACE ap_ctrl_none port=return
 
-#pragma HLS INTERFACE ap_ctrl_none port=return
+    // ——— AXI-Stream ports + bit-compact aggregation ——————————————————
+    #pragma HLS INTERFACE axis      register both port=top_bid
+    #pragma HLS aggregate          variable=top_bid    compact=bit  :contentReference[oaicite:0]{index=0}
 
-#pragma HLS DATA_PACK variable=outgoing_order struct_level
-#pragma HLS DATA_PACK variable=top_bid struct_level
-#pragma HLS DATA_PACK variable=top_ask struct_level
-#pragma HLS DATA_PACK variable=incoming_meta
-#pragma HLS DATA_PACK variable=outgoing_meta
+    #pragma HLS INTERFACE axis      register both port=top_ask
+    #pragma HLS aggregate          variable=top_ask    compact=bit
 
-	static const ap_ufixed<16,8> bid_threshold = 27.4;
-	static const ap_ufixed<16,8> ask_threshold = 27.4;
+    #pragma HLS INTERFACE axis      register both port=incoming_time
 
-	static order market_buy;
-	market_buy.price = 1;
-	market_buy.orderID = 123;
-	market_buy.direction = 1;
-	market_buy.size = 2;
+    #pragma HLS INTERFACE axis      register both port=incoming_meta
+    #pragma HLS aggregate          variable=incoming_meta compact=bit
 
-	static order market_sell;
-	market_sell.price = 1;
-	market_sell.orderID = 123;
-	market_sell.direction = 0;
-	market_sell.size = 2;
+    #pragma HLS INTERFACE axis      register both port=outgoing_order
+    #pragma HLS aggregate          variable=outgoing_order compact=bit
 
-	static order prev_bid;
-	static order prev_ask;
+    #pragma HLS INTERFACE axis      register both port=outgoing_time
 
-	if(!top_bid.empty() && !top_ask.empty() && !incoming_time.empty() && !incoming_meta.empty()
-			&& !outgoing_order.full() && !outgoing_time.full() && !outgoing_meta.full()){
-		order bid = top_bid.read();
-		order ask = top_ask.read();
-		metadata meta_buffer = incoming_meta.read();
-		Time time_buffer = incoming_time.read();
+    #pragma HLS INTERFACE axis      register both port=outgoing_meta
+    #pragma HLS aggregate          variable=outgoing_meta compact=bit
 
-		if(bid.price > bid_threshold){
-			outgoing_order.write(market_sell);
-			outgoing_meta.write(meta_buffer);
-			outgoing_time.write(time_buffer);
-		}
+    // ——— Pipeline top-level to II=1 —————————————————————————————
+    #pragma HLS PIPELINE II=1
 
-		if(ask.price < bid_threshold){
-			outgoing_order.write(market_buy);
-			outgoing_meta.write(meta_buffer);
-			outgoing_time.write(time_buffer);
-		}
+    // ——— Threshold constants —————————————————————————————————————
+    static const ap_ufixed<16,8> bid_threshold = 27.4;
+    static const ap_ufixed<16,8> ask_threshold = 27.4;
 
-		prev_bid = bid;
-		prev_ask = ask;
-	}
+    // ——— Prebuilt order messages —————————————————————————————————
+    static order market_buy  = { (ap_fixed<16,8>)1.0, (ap_uint<8>)2, (ap_uint<32>)123, (ap_uint<3>)1 };
+    static order market_sell = { (ap_fixed<16,8>)1.0, (ap_uint<8>)2, (ap_uint<32>)123, (ap_uint<3>)0 };
+
+    // ——— Main processing: fire on valid streams ———————————————————
+    if (!top_bid.empty()  &&
+        !top_ask.empty()  &&
+        !incoming_time.empty() &&
+        !incoming_meta.empty()  &&
+        !outgoing_order.full()  &&
+        !outgoing_time.full()   &&
+        !outgoing_meta.full())
+    {
+        order    bid = top_bid.read();
+        order    ask = top_ask.read();
+        Time     t   = incoming_time.read();
+        metadata m   = incoming_meta.read();
+
+        if (bid.price > bid_threshold) {
+            outgoing_order.write(market_sell);
+            outgoing_meta.write(m);
+            outgoing_time.write(t);
+        }
+        if (ask.price < ask_threshold) {
+            outgoing_order.write(market_buy);
+            outgoing_meta.write(m);
+            outgoing_time.write(t);
+        }
+    }
 }
