@@ -7,6 +7,7 @@ Based on: ECE1373 Course Project - High Frequency Trading
 ## old project is 8 years old, and was likely made using vivado 2014/2015 based on syntax
 ## It was also missing: src/hft_proj, the meat of the project, which ties all the custom IPs together 
 ## I maintained the repository, optimized it, removed huge #define <math.h> import overhead, and build custom "glue" to merge the IP's together 
+## Rewrote likely 10 year old syntax 
 ## running into resource over-utilization, I will truncate the implementation of the order book (biggest part of the project) 
 ### and try to move to a bigger board later 
 # ------------------------------------------------------------------------------
