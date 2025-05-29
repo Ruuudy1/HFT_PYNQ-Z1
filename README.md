@@ -2,6 +2,7 @@ Based on: ECE1373 Course Project - High Frequency Trading
 ===============================================
 
 # ------------------------------------------------------------------------------
+# made very heavy changes
 ## credits to original repo, I am simply maintaining it and descaling it down to a smaller board:
 ## old project is 8 years old, and was likely made using vivado 2014/2015 based on syntax
 ## It was also missing: src/hft_proj, the meat of the project, which ties all the custom IPs together 
