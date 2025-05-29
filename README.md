@@ -59,7 +59,10 @@ Implement only a simple price crossing detector
 Limit to processing 2-4 symbols instead of a full market
 
 
-their summary:
+
+
+
+# Their summary:
 
 Summary
 -----------------------------
