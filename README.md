@@ -1,11 +1,14 @@
 Based on: ECE1373 Course Project - High Frequency Trading
 ===============================================
 
+# ------------------------------------------------------------------------------
+## credits to original repo, I am simply maintaining it and descaling it down to a smaller board:
 ## old project is 8 years old, and was likely made using vivado 2014/2015 based on syntax
 ## It was also missing: src/hft_proj, the meat of the project, which ties all the custom IPs together 
 ## I maintained the repository, optimized it, removed huge #define <math.h> import overhead, and build custom "glue" to merge the IP's together 
 ## running into resource over-utilization, I will truncate the implementation of the order book (biggest part of the project) 
-### and try to move to a bigger  
+### and try to move to a bigger board later 
+# ------------------------------------------------------------------------------
 
 # My current problem (SEE output.txt):
 
