@@ -1,7 +1,7 @@
 Based on: ECE1373 Course Project - High Frequency Trading
 ===============================================
 
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------   
 ## Noteable changes:
 #### Credits to original repo, I am simply maintaining it and descaling it down to a smaller board:
 ##### Original project was likely made using vivado 2014/2015 based on syntax, I have made a working version for Vivado 2024.2 + Vitis 2024.2 (latest version availvable)
@@ -10,7 +10,7 @@ Based on: ECE1373 Course Project - High Frequency Trading
 ##### Rewrote likely 10 year old syntax 
 ##### TODO: running into resource over-utilization, I will truncate the implementation of the order book (biggest part of the project) 
 ##### TODO: Try to move to a bigger board later 
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------
 
 # My current problem (SEE output.txt):
 
