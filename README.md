@@ -4,7 +4,7 @@ Based on: ECE1373 Course Project - High Frequency Trading
 # ------------------------------------------------------------------------------
 ## Noteable changes:
 #### Credits to original repo, I am simply maintaining it and descaling it down to a smaller board:
-##### Original project was likely made using vivado 2014/2015 based on syntax, I have made a working version for Vivado 2024.2 (latest version availvable)
+##### Original project was likely made using vivado 2014/2015 based on syntax, I have made a working version for Vivado 2024.2 + Vitis 2024.2 (latest version availvable)
 ##### It was also missing: src/hft_proj, the meat of the project, which ties all the custom IPs together 
 ##### I maintained the repository, optimized it, removed huge #define <math.h> import overhead, and build custom "glue" to merge the IP's together 
 ##### Rewrote likely 10 year old syntax 
