@@ -1,38 +1,41 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 import socket
 from socket import AF_INET, SOCK_DGRAM
 import sys
+import platform
 from subprocess import call
-import datetime
 
 def main():
     hostIPAddr = '1.1.1.1'
-    port        = 641
+    port = 641
 
-    # XXX forces eth3 interface to be 1.1.1.2
-    call(["sudo ifconfig eth3 1.1.1.2"],shell=True)
+    # On Linux/PYNQ only: force eth0 → 1.1.1.2.
+    if platform.system() != "Windows":
+        call(["sudo ifconfig eth0 1.1.1.2"], shell=True)
+    else:
+        print("[INFO] Skipping eth0 reconfiguration on Windows")
 
     s = socket.socket(AF_INET, SOCK_DGRAM)
-    s.settimeout(0.1);
+    s.settimeout(0.1)
     while True:
-        hexString = input('Input hex sequence: ')
-        hexVal = int(hexString,16)
-        message = str(hexVal).encode()
-
-        print("input parsed as {}".format(message))
-        s.sendto(message.encode('utf-8'), (hostIPAddr, port))
+        hexString = input('Input hex sequence (e.g. a0b1c2...): ')
         try:
-            modifiedMessage, serverAddress = s.recvfrom(2048)
-            packet_sent_succesfully = True
-        except socket.timeout:
-            print("Timed out")
+            hexVal = int(hexString, 16)
+        except ValueError:
+            print("Invalid hex. Try again.")
+            continue
 
-        # print bytes in recv message
-        for ch in modifiedMessage:
-            print(hex(ord(ch)))
+        message = str(hexVal).encode()
+        print(f"[INFO] Sending bytes {message!r} to {hostIPAddr}:{port}")
+        s.sendto(message, (hostIPAddr, port))
+        try:
+            modifiedMessage, _ = s.recvfrom(2048)
+            print("[RX] Received reply bytes:")
+            for ch in modifiedMessage:
+                print(hex(ch), end=" ")
+            print("\n")
+        except socket.timeout:
+            print("[WARN] Timed out waiting for response.")
 
 if __name__ == '__main__':
     main()
-
-
-
