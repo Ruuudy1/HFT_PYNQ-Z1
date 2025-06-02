@@ -1,4 +1,5 @@
 Based on: ECE1373 Course Project - High Frequency Trading
+Based on: ECE1373 Course Project - High Frequency Trading
 ===============================================
 
 # ----------------------------------------------------------------   
