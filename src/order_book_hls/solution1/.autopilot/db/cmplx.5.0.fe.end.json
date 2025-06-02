@@ -2,17 +2,17 @@
     "0": {
         "name": "order_book",
         "file": "priority_queue.cpp",
-        "fileloc": "277",
-        "instructions": "14039",
-        "total_instructions": "19571",
-        "calls": "1 4 2 3",
-        "basicblocks": "2056",
+        "fileloc": "274",
+        "instructions": "7993",
+        "total_instructions": "11539",
+        "calls": "3 4 2 1",
+        "basicblocks": "1096",
         "loads": {
-            "G": "2070",
+            "G": "1110",
             "L": "44"
         },
         "stores": {
-            "G": "4698",
+            "G": "2458",
             "L": "46"
         },
         "loops": {
@@ -21,19 +21,19 @@
         }
     },
     "1": {
-        "name": "order_book_Pipeline_BID_PUSH_LOOP",
+        "name": "order_book_Pipeline_ASK_PUSH_LOOP2",
         "file": "order_book_src\/priority_queue.cpp",
-        "fileloc": "366",
-        "instructions": "1432",
-        "total_instructions": "1432",
+        "fileloc": "362",
+        "instructions": "860",
+        "total_instructions": "860",
         "calls": "",
-        "basicblocks": "143",
+        "basicblocks": "82",
         "loads": {
-            "G": "308",
-            "L": "183"
+            "G": "144",
+            "L": "103"
         },
         "stores": {
-            "G": "352",
+            "G": "192",
             "L": "17"
         },
         "loops": {
@@ -43,17 +43,17 @@
     "2": {
         "name": "order_book_Pipeline_ASK_PUSH_LOOP",
         "file": "order_book_src\/priority_queue.cpp",
-        "fileloc": "366",
-        "instructions": "1334",
-        "total_instructions": "1334",
+        "fileloc": "362",
+        "instructions": "860",
+        "total_instructions": "860",
         "calls": "",
-        "basicblocks": "142",
+        "basicblocks": "82",
         "loads": {
-            "G": "264",
-            "L": "183"
+            "G": "144",
+            "L": "103"
         },
         "stores": {
-            "G": "352",
+            "G": "192",
             "L": "17"
         },
         "loops": {
@@ -61,19 +61,19 @@
         }
     },
     "3": {
-        "name": "order_book_Pipeline_ASK_PUSH_LOOP2",
+        "name": "order_book_Pipeline_BID_PUSH_LOOP",
         "file": "order_book_src\/priority_queue.cpp",
-        "fileloc": "366",
-        "instructions": "1334",
-        "total_instructions": "1334",
+        "fileloc": "362",
+        "instructions": "913",
+        "total_instructions": "913",
         "calls": "",
-        "basicblocks": "142",
+        "basicblocks": "83",
         "loads": {
-            "G": "264",
-            "L": "183"
+            "G": "168",
+            "L": "103"
         },
         "stores": {
-            "G": "352",
+            "G": "192",
             "L": "17"
         },
         "loops": {
@@ -83,17 +83,17 @@
     "4": {
         "name": "order_book_Pipeline_BID_PUSH_LOOP1",
         "file": "order_book_src\/priority_queue.cpp",
-        "fileloc": "366",
-        "instructions": "1432",
-        "total_instructions": "1432",
+        "fileloc": "362",
+        "instructions": "913",
+        "total_instructions": "913",
         "calls": "",
-        "basicblocks": "143",
+        "basicblocks": "83",
         "loads": {
-            "G": "308",
-            "L": "183"
+            "G": "168",
+            "L": "103"
         },
         "stores": {
-            "G": "352",
+            "G": "192",
             "L": "17"
         },
         "loops": {

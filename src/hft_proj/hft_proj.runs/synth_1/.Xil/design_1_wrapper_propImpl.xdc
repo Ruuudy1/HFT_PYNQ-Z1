@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:C:/Users/ruuud/spring2025/cse145/AAAAHHHH/ECE1373_2016_hft_on_fpga/pynq_z1.xdc rfile:../../../../../pynq_z1.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:C:/Users/ruuud/spring2025/cse145/WORKINGPROJECTIDEA/ECE1373_2016_hft_on_fpga/pynq_z1.xdc rfile:../../../../../pynq_z1.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:8 export:INPUT save:INPUT read:READ} [current_design]
 set_property -dict {PACKAGE_PIN R14 IOSTANDARD LVCMOS33} [get_ports {led_l[0]}]
 set_property src_info {type:XDC file:1 line:9 export:INPUT save:INPUT read:READ} [current_design]

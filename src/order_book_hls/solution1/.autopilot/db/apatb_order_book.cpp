@@ -1252,8 +1252,8 @@ void order_book_hw_stub_wrapper(void*, void*, void*, void*, void*, void*, void*,
 extern "C"
 void apatb_order_book_hw(void* __xlx_apatb_param_order_stream, void* __xlx_apatb_param_incoming_time, void* __xlx_apatb_param_incoming_meta, void* __xlx_apatb_param_top_bid, void* __xlx_apatb_param_top_ask, void* __xlx_apatb_param_outgoing_time, void* __xlx_apatb_param_outgoing_meta, void* __xlx_apatb_param_top_bid_id, void* __xlx_apatb_param_top_ask_id)
 {
-  static hls::sim::Stream<hls::sim::Byte<12>> port0 {
-    .width = 96,
+  static hls::sim::Stream<hls::sim::Byte<8>> port0 {
+    .width = 64,
     .name = "order_stream",
 #ifdef POST_CHECK
     .reader = new hls::sim::Reader(WRAPC_STREAM_SIZE_IN_order_stream),
@@ -1263,11 +1263,11 @@ void apatb_order_book_hw(void* __xlx_apatb_param_order_stream, void* __xlx_apatb
     .gwriter = new hls::sim::Writer(WRAPC_STREAM_INGRESS_STATUS_order_stream),
 #endif
   };
-  port0.param = (hls::stream<hls::sim::Byte<12>>*)__xlx_apatb_param_order_stream;
+  port0.param = (hls::stream<hls::sim::Byte<8>>*)__xlx_apatb_param_order_stream;
   port0.hasWrite = false;
 
-  static hls::sim::Stream<hls::sim::Byte<8>> port1 {
-    .width = 64,
+  static hls::sim::Stream<hls::sim::Byte<4>> port1 {
+    .width = 32,
     .name = "incoming_time",
 #ifdef POST_CHECK
     .reader = new hls::sim::Reader(WRAPC_STREAM_SIZE_IN_incoming_time),
@@ -1277,7 +1277,7 @@ void apatb_order_book_hw(void* __xlx_apatb_param_order_stream, void* __xlx_apatb
     .gwriter = new hls::sim::Writer(WRAPC_STREAM_INGRESS_STATUS_incoming_time),
 #endif
   };
-  port1.param = (hls::stream<hls::sim::Byte<8>>*)__xlx_apatb_param_incoming_time;
+  port1.param = (hls::stream<hls::sim::Byte<4>>*)__xlx_apatb_param_incoming_time;
   port1.hasWrite = false;
 
   static hls::sim::Stream<hls::sim::Byte<16>> port2 {
@@ -1294,8 +1294,8 @@ void apatb_order_book_hw(void* __xlx_apatb_param_order_stream, void* __xlx_apatb
   port2.param = (hls::stream<hls::sim::Byte<16>>*)__xlx_apatb_param_incoming_meta;
   port2.hasWrite = false;
 
-  static hls::sim::Stream<hls::sim::Byte<12>> port3 {
-    .width = 96,
+  static hls::sim::Stream<hls::sim::Byte<8>> port3 {
+    .width = 64,
     .name = "top_bid",
 #ifdef POST_CHECK
     .reader = new hls::sim::Reader(AUTOTB_TVOUT_PC_top_bid),
@@ -1305,11 +1305,11 @@ void apatb_order_book_hw(void* __xlx_apatb_param_order_stream, void* __xlx_apatb
     .gwriter = new hls::sim::Writer(WRAPC_STREAM_EGRESS_STATUS_top_bid),
 #endif
   };
-  port3.param = (hls::stream<hls::sim::Byte<12>>*)__xlx_apatb_param_top_bid;
+  port3.param = (hls::stream<hls::sim::Byte<8>>*)__xlx_apatb_param_top_bid;
   port3.hasWrite = true;
 
-  static hls::sim::Stream<hls::sim::Byte<12>> port4 {
-    .width = 96,
+  static hls::sim::Stream<hls::sim::Byte<8>> port4 {
+    .width = 64,
     .name = "top_ask",
 #ifdef POST_CHECK
     .reader = new hls::sim::Reader(AUTOTB_TVOUT_PC_top_ask),
@@ -1319,11 +1319,11 @@ void apatb_order_book_hw(void* __xlx_apatb_param_order_stream, void* __xlx_apatb
     .gwriter = new hls::sim::Writer(WRAPC_STREAM_EGRESS_STATUS_top_ask),
 #endif
   };
-  port4.param = (hls::stream<hls::sim::Byte<12>>*)__xlx_apatb_param_top_ask;
+  port4.param = (hls::stream<hls::sim::Byte<8>>*)__xlx_apatb_param_top_ask;
   port4.hasWrite = true;
 
-  static hls::sim::Stream<hls::sim::Byte<8>> port5 {
-    .width = 64,
+  static hls::sim::Stream<hls::sim::Byte<4>> port5 {
+    .width = 32,
     .name = "outgoing_time",
 #ifdef POST_CHECK
     .reader = new hls::sim::Reader(AUTOTB_TVOUT_PC_outgoing_time),
@@ -1333,7 +1333,7 @@ void apatb_order_book_hw(void* __xlx_apatb_param_order_stream, void* __xlx_apatb
     .gwriter = new hls::sim::Writer(WRAPC_STREAM_EGRESS_STATUS_outgoing_time),
 #endif
   };
-  port5.param = (hls::stream<hls::sim::Byte<8>>*)__xlx_apatb_param_outgoing_time;
+  port5.param = (hls::stream<hls::sim::Byte<4>>*)__xlx_apatb_param_outgoing_time;
   port5.hasWrite = true;
 
   static hls::sim::Stream<hls::sim::Byte<16>> port6 {

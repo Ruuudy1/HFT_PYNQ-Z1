@@ -12,9 +12,9 @@ module order_book_hole_idx_bid_RAM_AUTO_1R1W (
      
     reset, clk);
 
-parameter DataWidth = 11;
-parameter AddressWidth = 12;
-parameter AddressRange = 4096;
+parameter DataWidth = 6;
+parameter AddressWidth = 7;
+parameter AddressRange = 128;
  
 input[AddressWidth-1:0] address0;
 input ce0;

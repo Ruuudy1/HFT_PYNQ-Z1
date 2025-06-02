@@ -153,7 +153,6 @@ extern "C" {
 }
 # 2 "<built-in>" 2
 # 1 "order_book_src/priority_queue.cpp" 2
-
 # 1 "order_book_src/priority_queue.hpp" 1
 
 
@@ -32725,12 +32724,20 @@ inline __attribute__((nodebug)) bool operator!=(
 
 
 
-static ap_uint<4> log_rom[4096] = {0, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11};
 
+
+static ap_uint<4> log_rom[128] = {0, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3,
+                                      4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                                      5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                                      5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                                      6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+                                      6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+                                      6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+                                      6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6};
 
 using namespace hls;
 
-typedef ap_uint<64> Time;
+typedef ap_uint<32> Time;
 
 struct sockaddr_in {
     ap_uint<16> port;
@@ -32745,7 +32752,7 @@ struct metadata {
 struct order {
     ap_fixed<16,8> price;
     ap_uint<8> size;
-    ap_uint<32> orderID;
+    ap_uint<16> orderID;
     ap_uint<3> direction;
 };
 
@@ -32767,21 +32774,21 @@ int log_base_2(unsigned index);
 
 int pow2(int level);
 
-int find_path(unsigned& counter, int& hole_counter, int hole_idx[4096], int level);
+int find_path(unsigned& counter, int& hole_counter, int hole_idx[128], int level);
 
 unsigned calculate_index(int insert_path, int level, int idx);
 
-order left_child(unsigned level, unsigned index, order queue[12][4096/2]);
+order left_child(unsigned level, unsigned index, order queue[7][128/2]);
 
-order right_child(unsigned level, unsigned index, order queue[12][4096/2]);
+order right_child(unsigned level, unsigned index, order queue[7][128/2]);
 
 
-void add_bid(order heap[12][4096/2],
+void add_bid(order heap[7][128/2],
               order &new_order,
               unsigned& heap_counter,
               int& hole_counter,
-              int hole_idx[4096],
-              int hole_lvl[4096],
+              int hole_idx[128],
+              int hole_lvl[128],
               hls::stream<order> &top_bid,
               hls::stream<order> &top_ask,
               hls::stream<Time> &outgoing_time,
@@ -32793,20 +32800,20 @@ void add_bid(order heap[12][4096/2],
               order ask,
               bool write_flag
              );
-void remove_bid( order heap[12][4096/2],
+void remove_bid( order heap[7][128/2],
                  ap_uint<8>& req_size,
                  unsigned& heap_counter,
                  int& hole_counter,
-                 int hole_idx[4096],
-                 int hole_lvl[4096],
+                 int hole_idx[128],
+                 int hole_lvl[128],
                  order dummy_order
                );
-void add_ask( order heap[12][4096/2],
+void add_ask( order heap[7][128/2],
               order &new_order,
               unsigned& heap_counter,
               int& hole_counter,
-              int hole_idx[4096],
-              int hole_lvl[4096],
+              int hole_idx[128],
+              int hole_lvl[128],
               hls::stream<order> &top_bid,
               hls::stream<order> &top_ask,
               hls::stream<Time> &outgoing_time,
@@ -32818,15 +32825,15 @@ void add_ask( order heap[12][4096/2],
               order bid,
               bool write_flag
             );
-void remove_ask( order heap[12][4096/2],
+void remove_ask( order heap[7][128/2],
                  ap_uint<8>& req_size,
                  unsigned& heap_counter,
                  int& hole_counter,
-                 int hole_idx[4096],
-                 int hole_lvl[4096],
+                 int hole_idx[128],
+                 int hole_lvl[128],
                  order dummy_order
                );
-# 3 "order_book_src/priority_queue.cpp" 2
+# 2 "order_book_src/priority_queue.cpp" 2
 
 
 int log_base_2(unsigned index){
@@ -32839,7 +32846,7 @@ int pow2(int level){
  return 1 << level;
 }
 
-int find_path(unsigned& counter, int& hole_counter, int hole_idx[4096], int level){
+int find_path(unsigned& counter, int& hole_counter, int hole_idx[128], int level){
 #pragma HLS INLINE
  if (hole_counter > 0) {
         int temp = hole_idx[--hole_counter];
@@ -32857,24 +32864,24 @@ unsigned calculate_index(int insert_path, int level, int idx){
     return bit ? (2*idx + 1) : (2*idx);
 }
 
-order left_child(unsigned level, unsigned index, order queue[12][4096/2]){
+order left_child(unsigned level, unsigned index, order queue[7][128/2]){
 #pragma HLS INLINE
  return queue[level+1][index*2];
 }
 
-order right_child(unsigned level, unsigned index, order queue[12][4096/2]){
+order right_child(unsigned level, unsigned index, order queue[7][128/2]){
 #pragma HLS INLINE
  return queue[level+1][index*2 + 1];
 }
 
 
 
-void add_bid(order heap[12][4096/2],
+void add_bid(order heap[7][128/2],
              order &new_order,
              unsigned& heap_counter,
              int& hole_counter,
-             int hole_idx[4096],
-             int hole_lvl[4096],
+             int hole_idx[128],
+             int hole_lvl[128],
              hls::stream<order> &top_bid,
              hls::stream<order> &top_ask,
              hls::stream<Time> &outgoing_time,
@@ -32934,12 +32941,12 @@ void add_bid(order heap[12][4096/2],
 }
 
 
-void remove_bid(order heap[12][4096/2],
+void remove_bid(order heap[7][128/2],
                 ap_uint<8>& req_size,
                 unsigned& heap_counter,
                 int& hole_counter,
-                int hole_idx[4096],
-                int hole_lvl[4096],
+                int hole_idx[128],
+                int hole_lvl[128],
                 order dummy_order)
 {
 #pragma HLS INLINE
@@ -32948,21 +32955,18 @@ void remove_bid(order heap[12][4096/2],
         heap[0][0].size -= req_size;
         req_size = 0;
     }
-
-    else{
+    else {
         req_size -= heap[0][0].size;
         heap_counter--;
         hole_counter++;
         unsigned level = 0;
         unsigned new_idx = 0;
-        unsigned hole_level = 0;
-        unsigned hole_index = 0;
         unsigned offset = 0;
         order left = left_child(level, new_idx, heap);
         order right = right_child(level, new_idx, heap);
 
         BID_POP_LOOP:
-        while(level < 12 -1){
+        while(level < 7 -1){
 #pragma HLS DEPENDENCE variable=heap inter false
 #pragma HLS LOOP_TRIPCOUNT max=11
 #pragma HLS PIPELINE II=1
@@ -32986,12 +32990,12 @@ void remove_bid(order heap[12][4096/2],
 }
 
 
-void add_ask(order heap[12][4096/2],
+void add_ask(order heap[7][128/2],
              order &new_order,
              unsigned& heap_counter,
              int& hole_counter,
-             int hole_idx[4096],
-             int hole_lvl[4096],
+             int hole_idx[128],
+             int hole_lvl[128],
              hls::stream<order> &top_bid,
              hls::stream<order> &top_ask,
              hls::stream<Time> &outgoing_time,
@@ -33050,12 +33054,13 @@ void add_ask(order heap[12][4096/2],
     heap[level][new_idx] = new_order;
 }
 
-void remove_ask(order heap[12][4096/2],
+
+void remove_ask(order heap[7][128/2],
                 ap_uint<8>& req_size,
                 unsigned& heap_counter,
                 int& hole_counter,
-                int hole_idx[4096],
-                int hole_lvl[4096],
+                int hole_idx[128],
+                int hole_lvl[128],
                 order dummy_order)
 {
 #pragma HLS INLINE
@@ -33064,8 +33069,7 @@ void remove_ask(order heap[12][4096/2],
         heap[0][0].size -= req_size;
         req_size = 0;
     }
-
-    else{
+    else {
         req_size -= heap[0][0].size;
         heap_counter--;
         hole_counter++;
@@ -33076,7 +33080,7 @@ void remove_ask(order heap[12][4096/2],
         order right = right_child(level, new_idx, heap);
 
         ASK_POP_LOOP:
-        while(level < 12 -1){
+        while(level < 7 -1){
 #pragma HLS DEPENDENCE variable=heap inter false
 #pragma HLS LOOP_TRIPCOUNT max=11
 #pragma HLS PIPELINE II=1
@@ -33101,6 +33105,7 @@ void remove_ask(order heap[12][4096/2],
     }
 }
 
+
 __attribute__((sdx_kernel("order_book", 0))) void order_book(hls::stream<order> &order_stream,
                 hls::stream<Time> &incoming_time,
                 hls::stream<metadata> &incoming_meta,
@@ -33111,9 +33116,11 @@ __attribute__((sdx_kernel("order_book", 0))) void order_book(hls::stream<order> 
                 ap_uint<32> &top_bid_id,
                 ap_uint<32> &top_ask_id)
 {
-#line 9 "C:/Users/ruuud/spring2025/cse145/AAAAHHHH/ECE1373_2016_hft_on_fpga/src/build_order_book_core.tcl"
+#line 9 "C:/Users/ruuud/spring2025/cse145/WORKINGPROJECTIDEA/ECE1373_2016_hft_on_fpga/src/build_order_book_core.tcl"
 #pragma HLSDIRECTIVE TOP name=order_book
-# 286 "order_book_src/priority_queue.cpp"
+# 283 "order_book_src/priority_queue.cpp"
+
+
 
 
 #pragma HLS INTERFACE s_axilite port=top_ask_id
@@ -33130,13 +33137,6 @@ __attribute__((sdx_kernel("order_book", 0))) void order_book(hls::stream<order> 
 #pragma HLS INTERFACE axis register both port=outgoing_meta
 
 
-#pragma HLS DATA_PACK variable=order_stream
-#pragma HLS DATA_PACK variable=incoming_meta
-#pragma HLS DATA_PACK variable=outgoing_meta
-#pragma HLS DATA_PACK variable=top_bid
-#pragma HLS DATA_PACK variable=top_ask
-
-
 #pragma HLS PIPELINE II=1
 
 
@@ -33144,46 +33144,50 @@ __attribute__((sdx_kernel("order_book", 0))) void order_book(hls::stream<order> 
     static order dummy_ask = {(ap_fixed<16,8>)255,0,0,0};
 
 
-    static order bid[12][4096/2];
+    static order bid[7][128/2];
 #pragma HLS ARRAY_PARTITION variable=bid complete dim=1
 #pragma HLS ARRAY_PARTITION variable=bid cyclic factor=4 dim=2
 #pragma HLS DEPENDENCE variable=bid inter false
+#pragma HLS RESOURCE variable=bid core=RAM_1P_BRAM
 
- static order ask[12][4096/2];
+ static order ask[7][128/2];
 #pragma HLS ARRAY_PARTITION variable=ask complete dim=1
 #pragma HLS ARRAY_PARTITION variable=ask cyclic factor=4 dim=2
 #pragma HLS DEPENDENCE variable=ask inter false
+#pragma HLS RESOURCE variable=ask core=RAM_1P_BRAM
 
- static order bid_remove[12][4096/2];
+ static order bid_remove[7][128/2];
 #pragma HLS ARRAY_PARTITION variable=bid_remove complete dim=1
 #pragma HLS ARRAY_PARTITION variable=bid_remove cyclic factor=4 dim=2
 #pragma HLS DEPENDENCE variable=bid_remove inter false
+#pragma HLS RESOURCE variable=bid_remove core=RAM_1P_BRAM
 
- static order ask_remove[12][4096/2];
+ static order ask_remove[7][128/2];
 #pragma HLS ARRAY_PARTITION variable=ask_remove complete dim=1
 #pragma HLS ARRAY_PARTITION variable=ask_remove cyclic factor=4 dim=2
 #pragma HLS DEPENDENCE variable=ask_remove inter false
+#pragma HLS RESOURCE variable=ask_remove core=RAM_1P_BRAM
 
 
  static unsigned counter_bid = 0;
     static int hole_counter_bid = 0;
-    static int hole_idx_bid[4096];
-    static int hole_lvl_bid[4096];
+    static int hole_idx_bid[128];
+    static int hole_lvl_bid[128];
 
     static unsigned counter_ask = 0;
     static int hole_counter_ask = 0;
-    static int hole_idx_ask[4096];
-    static int hole_lvl_ask[4096];
+    static int hole_idx_ask[128];
+    static int hole_lvl_ask[128];
 
     static unsigned counter_bid_remove = 0;
     static int hole_counter_bid_remove = 0;
-    static int hole_idx_bid_remove[4096];
-    static int hole_lvl_bid_remove[4096];
+    static int hole_idx_bid_remove[128];
+    static int hole_lvl_bid_remove[128];
 
     static unsigned counter_ask_remove = 0;
     static int hole_counter_ask_remove = 0;
-    static int hole_idx_ask_remove[4096];
-    static int hole_lvl_ask_remove[4096];
+    static int hole_idx_ask_remove[128];
+    static int hole_lvl_ask_remove[128];
 
 
     if (!order_stream.empty() &&
@@ -33201,19 +33205,18 @@ __attribute__((sdx_kernel("order_book", 0))) void order_book(hls::stream<order> 
 
         if(input.direction == 3){
 
-            add_bid(bid, input, counter_bid, hole_counter_bid, hole_idx_bid, hole_lvl_bid, top_bid,
-                     top_ask, outgoing_time, outgoing_meta, top_bid_id, top_ask_id,
-                     time_buffer, meta_buffer, ask[0][0], true);
+            add_bid(bid, input, counter_bid, hole_counter_bid, hole_idx_bid, hole_lvl_bid,
+                    top_bid, top_ask, outgoing_time, outgoing_meta,
+                    top_bid_id, top_ask_id,
+                    time_buffer, meta_buffer, ask[0][0], true);
 
-            if (counter_bid == 4096 -1)
+            if (counter_bid == 128 -1)
                 counter_bid--;
         }
 
 
         else if (input.direction == 5){
             ap_uint<8> req_size = input.size;
-
-
             if(input.orderID == 0){
                 OPEN_BID_REMOVE:
                 while (req_size > 0){
@@ -33229,11 +33232,10 @@ __attribute__((sdx_kernel("order_book", 0))) void order_book(hls::stream<order> 
                     }
                 }
             }
-
             else if(input.orderID == bid[0][0].orderID){
                 req_size = bid[0][0].size;
                 remove_bid(bid, req_size, counter_bid, hole_counter_bid, hole_idx_bid, hole_lvl_bid, dummy_bid);
-                VITIS_LOOP_405_1: while(bid[0][0].orderID == bid_remove[0][0].orderID && bid[0][0].orderID != 0){
+                VITIS_LOOP_399_1: while(bid[0][0].orderID == bid_remove[0][0].orderID && bid[0][0].orderID != 0){
 #pragma HLS LOOP_TRIPCOUNT min=0 max=1
  ap_uint<8> temp = bid[0][0].size;
                     ap_uint<8> temp_remove = bid_remove[0][0].size;
@@ -33241,30 +33243,27 @@ __attribute__((sdx_kernel("order_book", 0))) void order_book(hls::stream<order> 
                     remove_bid(bid_remove, temp_remove, counter_bid_remove, hole_counter_bid_remove, hole_idx_bid_remove, hole_lvl_bid_remove, dummy_bid);
                 }
             }
-
-            else{
-                add_bid(bid_remove, input, counter_bid_remove, hole_counter_bid_remove, hole_idx_bid_remove, hole_lvl_bid_remove, top_bid,
-                         top_ask, outgoing_time, outgoing_meta, top_bid_id, top_ask_id,
-                         time_buffer, meta_buffer, ask[0][0], false);
+            else {
+                add_bid(bid_remove, input, counter_bid_remove, hole_counter_bid_remove, hole_idx_bid_remove, hole_lvl_bid_remove,
+                        top_bid, top_ask, outgoing_time, outgoing_meta,
+                        top_bid_id, top_ask_id,
+                        time_buffer, meta_buffer, ask[0][0], false);
             }
         }
 
 
         else if(input.direction == 2){
-
-            add_ask(ask, input, counter_ask, hole_counter_ask, hole_idx_ask, hole_lvl_ask, top_bid,
-                    top_ask, outgoing_time, outgoing_meta, top_bid_id, top_ask_id,
+            add_ask(ask, input, counter_ask, hole_counter_ask, hole_idx_ask, hole_lvl_ask,
+                    top_bid, top_ask, outgoing_time, outgoing_meta,
+                    top_bid_id, top_ask_id,
                     time_buffer, meta_buffer, bid[0][0], true);
-
-            if (counter_ask == 4096 -1)
+            if (counter_ask == 128 -1)
                 counter_ask--;
         }
 
 
         else if (input.direction == 4){
             ap_uint<8> req_size = input.size;
-
-
             if(input.orderID == 0){
                 OPEN_ASK_REMOVE:
                 while (req_size > 0){
@@ -33280,11 +33279,10 @@ __attribute__((sdx_kernel("order_book", 0))) void order_book(hls::stream<order> 
                     }
                 }
             }
-
             else if(input.orderID == ask[0][0].orderID){
                 req_size = ask[0][0].size;
                 remove_ask(ask, req_size, counter_ask, hole_counter_ask, hole_idx_ask, hole_lvl_ask, dummy_ask);
-                VITIS_LOOP_456_2: while(ask[0][0].orderID == ask_remove[0][0].orderID && ask[0][0].orderID != 0){
+                VITIS_LOOP_446_2: while(ask[0][0].orderID == ask_remove[0][0].orderID && ask[0][0].orderID != 0){
 #pragma HLS LOOP_TRIPCOUNT min=0 max=1
  ap_uint<8> temp = ask[0][0].size;
                     ap_uint<8> temp_remove = ask_remove[0][0].size;
@@ -33292,11 +33290,10 @@ __attribute__((sdx_kernel("order_book", 0))) void order_book(hls::stream<order> 
                     remove_ask(ask_remove, temp_remove, counter_ask_remove, hole_counter_ask_remove, hole_idx_ask_remove, hole_lvl_ask_remove, dummy_ask);
                 }
             }
-
-            else{
+            else {
                 add_ask(ask_remove, input, counter_ask_remove, hole_counter_ask_remove, hole_idx_ask_remove,
-                        hole_lvl_ask_remove, top_bid,
-                        top_ask, outgoing_time, outgoing_meta, top_bid_id, top_ask_id,
+                        hole_lvl_ask_remove, top_bid, top_ask, outgoing_time, outgoing_meta,
+                        top_bid_id, top_ask_id,
                         time_buffer, meta_buffer, ask[0][0], false);
             }
         }

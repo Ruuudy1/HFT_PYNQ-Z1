@@ -1,6 +1,6 @@
 <dict>
   <key>main-file</key>
-  <string>C:/Users/ruuud/spring2025/cse145/AAAAHHHH/ECE1373_2016_hft_on_fpga/src/order_book_hls/solution1/.autopilot/db/priority_queue.pp.0.cpp</string>
+  <string>C:/Users/ruuud/spring2025/cse145/WORKINGPROJECTIDEA/ECE1373_2016_hft_on_fpga/src/order_book_hls/solution1/.autopilot/db/priority_queue.pp.0.cpp</string>
   <key>diagnostics</key>
   <array>
     <dict>
@@ -9,15 +9,15 @@
       <key>filename</key>
       <string>order_book_src/priority_queue.cpp</string>
       <key>line</key>
-      <integer>302</integer>
+      <integer>312</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
-      <string>the pragma is not supported and will be ignored</string>
+      <string>&apos;Resource pragma&apos; is deprecated, use &apos;bind_op/bind_storage pragma&apos; instead</string>
       <key>ID</key>
-      <integer>5516</integer>
+      <integer>5538</integer>
       <key>WarningOption</key>
-      <string>invalid-hls-pragmas</string>
+      <string>ignored-hls-pragmas</string>
     </dict>
     <dict>
       <key>level</key>
@@ -25,15 +25,15 @@
       <key>filename</key>
       <string>order_book_src/priority_queue.cpp</string>
       <key>line</key>
-      <integer>303</integer>
+      <integer>318</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
-      <string>the pragma is not supported and will be ignored</string>
+      <string>&apos;Resource pragma&apos; is deprecated, use &apos;bind_op/bind_storage pragma&apos; instead</string>
       <key>ID</key>
-      <integer>5516</integer>
+      <integer>5538</integer>
       <key>WarningOption</key>
-      <string>invalid-hls-pragmas</string>
+      <string>ignored-hls-pragmas</string>
     </dict>
     <dict>
       <key>level</key>
@@ -41,15 +41,15 @@
       <key>filename</key>
       <string>order_book_src/priority_queue.cpp</string>
       <key>line</key>
-      <integer>304</integer>
+      <integer>324</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
-      <string>the pragma is not supported and will be ignored</string>
+      <string>&apos;Resource pragma&apos; is deprecated, use &apos;bind_op/bind_storage pragma&apos; instead</string>
       <key>ID</key>
-      <integer>5516</integer>
+      <integer>5538</integer>
       <key>WarningOption</key>
-      <string>invalid-hls-pragmas</string>
+      <string>ignored-hls-pragmas</string>
     </dict>
     <dict>
       <key>level</key>
@@ -57,31 +57,15 @@
       <key>filename</key>
       <string>order_book_src/priority_queue.cpp</string>
       <key>line</key>
-      <integer>305</integer>
+      <integer>330</integer>
       <key>column</key>
       <integer>9</integer>
       <key>message</key>
-      <string>the pragma is not supported and will be ignored</string>
+      <string>&apos;Resource pragma&apos; is deprecated, use &apos;bind_op/bind_storage pragma&apos; instead</string>
       <key>ID</key>
-      <integer>5516</integer>
+      <integer>5538</integer>
       <key>WarningOption</key>
-      <string>invalid-hls-pragmas</string>
-    </dict>
-    <dict>
-      <key>level</key>
-      <string>warning</string>
-      <key>filename</key>
-      <string>order_book_src/priority_queue.cpp</string>
-      <key>line</key>
-      <integer>306</integer>
-      <key>column</key>
-      <integer>9</integer>
-      <key>message</key>
-      <string>the pragma is not supported and will be ignored</string>
-      <key>ID</key>
-      <integer>5516</integer>
-      <key>WarningOption</key>
-      <string>invalid-hls-pragmas</string>
+      <string>ignored-hls-pragmas</string>
     </dict>
   </array>
 </dict>

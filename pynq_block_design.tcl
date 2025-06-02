@@ -46,18 +46,28 @@ create_bd_cell -type ip -vlnv xilinx.com:hls:MicroblazeToSwitch:1.0 MicroblazeTo
 connect_bd_net [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins MicroblazeToSwitch_0/ap_clk]
 connect_bd_net [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins MicroblazeToSwitch_0/ap_rst_n]
 
-# Add data width converters to fix data width mismatches
+# Add data width converters with CORRECTED BYTE SIZES for optimized data structures
+# For order_data_converter (fast_protocol to order_book)
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 order_data_converter
-set_property -dict [list CONFIG.S_TDATA_NUM_BYTES {8} CONFIG.M_TDATA_NUM_BYTES {12}] [get_bd_cells order_data_converter]
+set_property -dict [list CONFIG.S_TDATA_NUM_BYTES {4} CONFIG.M_TDATA_NUM_BYTES {6}] [get_bd_cells order_data_converter]
+
+# For top_bid_converter and top_ask_converter (order_book to threshold)
+create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 top_bid_converter
+set_property -dict [list CONFIG.S_TDATA_NUM_BYTES {6} CONFIG.M_TDATA_NUM_BYTES {4}] [get_bd_cells top_bid_converter]
 
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 top_ask_converter
-set_property -dict [list CONFIG.S_TDATA_NUM_BYTES {12} CONFIG.M_TDATA_NUM_BYTES {8}] [get_bd_cells top_ask_converter]
+set_property -dict [list CONFIG.S_TDATA_NUM_BYTES {6} CONFIG.M_TDATA_NUM_BYTES {4}] [get_bd_cells top_ask_converter]
 
-create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 top_bid_converter
-set_property -dict [list CONFIG.S_TDATA_NUM_BYTES {12} CONFIG.M_TDATA_NUM_BYTES {8}] [get_bd_cells top_bid_converter]
-
+# For meta_converter (order_book to threshold)
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 meta_converter
-set_property -dict [list CONFIG.S_TDATA_NUM_BYTES {16} CONFIG.M_TDATA_NUM_BYTES {12}] [get_bd_cells meta_converter]
+set_property -dict [list CONFIG.S_TDATA_NUM_BYTES {12} CONFIG.M_TDATA_NUM_BYTES {8}] [get_bd_cells meta_converter]
+
+# New time converters for time signals (now 32-bit instead of 64-bit)
+create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 time_converter_in
+set_property -dict [list CONFIG.S_TDATA_NUM_BYTES {4} CONFIG.M_TDATA_NUM_BYTES {4}] [get_bd_cells time_converter_in]
+
+create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 time_converter_out
+set_property -dict [list CONFIG.S_TDATA_NUM_BYTES {4} CONFIG.M_TDATA_NUM_BYTES {4}] [get_bd_cells time_converter_out]
 
 # Connect clocks and resets to the data width converters
 connect_bd_net [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins order_data_converter/aclk]
@@ -72,6 +82,12 @@ connect_bd_net [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins to
 connect_bd_net [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins meta_converter/aclk]
 connect_bd_net [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins meta_converter/aresetn]
 
+connect_bd_net [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins time_converter_in/aclk]
+connect_bd_net [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins time_converter_in/aresetn]
+
+connect_bd_net [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins time_converter_out/aclk]
+connect_bd_net [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins time_converter_out/aresetn]
+
 # Connect AXI interfaces to cores that have them
 connect_bd_intf_net [get_bd_intf_pins processing_system7_0/M_AXI_GP0] [get_bd_intf_pins axi_interconnect_0/S00_AXI]
 connect_bd_intf_net [get_bd_intf_pins axi_interconnect_0/M00_AXI] [get_bd_intf_pins order_book_0/s_axi_control]
@@ -82,9 +98,12 @@ connect_bd_intf_net [get_bd_intf_pins axi_interconnect_0/M01_AXI] [get_bd_intf_p
 connect_bd_intf_net [get_bd_intf_pins fast_protocol_0/order_to_book] [get_bd_intf_pins order_data_converter/S_AXIS]
 connect_bd_intf_net [get_bd_intf_pins order_data_converter/M_AXIS] [get_bd_intf_pins order_book_0/order_stream]
 
-# Direct connections for metadata and time (assuming they match)
+# Direct connection for metadata (using meta converter for input)
 connect_bd_intf_net [get_bd_intf_pins fast_protocol_0/metadata_to_book] [get_bd_intf_pins order_book_0/incoming_meta]
-connect_bd_intf_net [get_bd_intf_pins fast_protocol_0/time_to_book] [get_bd_intf_pins order_book_0/incoming_time]
+
+# Time connections through time converters
+connect_bd_intf_net [get_bd_intf_pins fast_protocol_0/time_to_book] [get_bd_intf_pins time_converter_in/S_AXIS]
+connect_bd_intf_net [get_bd_intf_pins time_converter_in/M_AXIS] [get_bd_intf_pins order_book_0/incoming_time]
 
 # Order Book to Threshold connections through converters
 connect_bd_intf_net [get_bd_intf_pins order_book_0/outgoing_meta] [get_bd_intf_pins meta_converter/S_AXIS]
@@ -96,8 +115,9 @@ connect_bd_intf_net [get_bd_intf_pins top_bid_converter/M_AXIS] [get_bd_intf_pin
 connect_bd_intf_net [get_bd_intf_pins order_book_0/top_ask] [get_bd_intf_pins top_ask_converter/S_AXIS]
 connect_bd_intf_net [get_bd_intf_pins top_ask_converter/M_AXIS] [get_bd_intf_pins simple_threshold_0/top_ask]
 
-# Direct connection for time (assuming it matches)
-connect_bd_intf_net [get_bd_intf_pins order_book_0/outgoing_time] [get_bd_intf_pins simple_threshold_0/incoming_time]
+# Time connections through time converters
+connect_bd_intf_net [get_bd_intf_pins order_book_0/outgoing_time] [get_bd_intf_pins time_converter_out/S_AXIS]
+connect_bd_intf_net [get_bd_intf_pins time_converter_out/M_AXIS] [get_bd_intf_pins simple_threshold_0/incoming_time]
 
 # AXI-Stream FIFOs as buffers for threshold outputs
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 order_fifo
@@ -140,12 +160,17 @@ connect_bd_net [get_bd_pins xlconcat_0/dout] [get_bd_ports led_l]
 # Set some status signals for debugging
 connect_bd_net [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins xlconcat_0/In0]
 connect_bd_net [get_bd_pins clk_wiz_0/locked] [get_bd_pins xlconcat_0/In1]
+connect_bd_net [get_bd_ports user_sw_l] [get_bd_pins xlconcat_0/In2]
+connect_bd_net [get_bd_pins proc_sys_reset_0/peripheral_reset] [get_bd_pins xlconcat_0/In3]
 
 # Address assignments
 assign_bd_address
 
 # Connect clock to S_AXI_HP0 interface
 connect_bd_net [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK]
+
+# Validate the design
+validate_bd_design
 
 # Save the block design
 save_bd_design

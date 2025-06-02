@@ -1,4 +1,3 @@
-// priority_queue.cpp
 #include "priority_queue.hpp"
 
 //— simple inlines for heap math
@@ -116,20 +115,17 @@ void remove_bid(order heap[LEVELS][CAPACITY/2],
                 order dummy_order)
 {
 #pragma HLS INLINE
-    //If the incoming remove order is of size less than the top, modify the size and don't pop
+    // If incoming remove order is smaller than top, shrink size
     if (req_size < heap[0][0].size){
         heap[0][0].size -= req_size;
         req_size = 0;
     }
-    //Else, the top is removed and the book is re-heapified
-    else{
+    else {
         req_size -= heap[0][0].size;
         heap_counter--;
         hole_counter++;
         unsigned level = 0;
         unsigned new_idx = 0;
-        unsigned hole_level = 0;
-        unsigned hole_index = 0;
         unsigned offset = 0;
         order left = left_child(level, new_idx, heap);
         order right = right_child(level, new_idx, heap);
@@ -223,6 +219,7 @@ void add_ask(order heap[LEVELS][CAPACITY/2],
     heap[level][new_idx] = new_order;
 }
 
+
 void remove_ask(order heap[LEVELS][CAPACITY/2],
                 ap_uint<8>& req_size,
                 unsigned& heap_counter,
@@ -232,13 +229,12 @@ void remove_ask(order heap[LEVELS][CAPACITY/2],
                 order dummy_order)
 {
 #pragma HLS INLINE
-    //If the incoming remove order is of size less than the top, modify the size and don't pop
+    // If incoming remove order is smaller than top, shrink size
     if (req_size < heap[0][0].size){
         heap[0][0].size -= req_size;
         req_size = 0;
     }
-    //Else, the top is removed and the book is re-heapified
-    else{
+    else {
         req_size -= heap[0][0].size;
         heap_counter--;
         hole_counter++;
@@ -274,6 +270,7 @@ void remove_ask(order heap[LEVELS][CAPACITY/2],
     }
 }
 
+
 void order_book(hls::stream<order>    &order_stream,
                 hls::stream<Time>     &incoming_time,
                 hls::stream<metadata> &incoming_meta,
@@ -284,54 +281,53 @@ void order_book(hls::stream<order>    &order_stream,
                 ap_uint<32>           &top_bid_id,
                 ap_uint<32>           &top_ask_id)
 {
-    //— control & AXI-Lite
-#pragma HLS INTERFACE s_axilite port=top_ask_id
-#pragma HLS INTERFACE s_axilite port=top_bid_id
-#pragma HLS INTERFACE ap_ctrl_none port=return
+    // — Delete ALLOCATION pragmas (they were causing errors in 2024.2)
 
-    //— AXI-Stream ports (register both sides)
-#pragma HLS INTERFACE axis register both port=order_stream
-#pragma HLS INTERFACE axis register both port=incoming_time
-#pragma HLS INTERFACE axis register both port=incoming_meta
-#pragma HLS INTERFACE axis register both port=top_bid
-#pragma HLS INTERFACE axis register both port=top_ask
-#pragma HLS INTERFACE axis register both port=outgoing_time
-#pragma HLS INTERFACE axis register both port=outgoing_meta
+    // (2) Control & AXI-Lite
+    #pragma HLS INTERFACE s_axilite port=top_ask_id
+    #pragma HLS INTERFACE s_axilite port=top_bid_id
+    #pragma HLS INTERFACE ap_ctrl_none port=return
 
-    //— pack structs on TDATA
-#pragma HLS DATA_PACK variable=order_stream
-#pragma HLS DATA_PACK variable=incoming_meta
-#pragma HLS DATA_PACK variable=outgoing_meta
-#pragma HLS DATA_PACK variable=top_bid
-#pragma HLS DATA_PACK variable=top_ask
+    // (3) AXI-Stream ports (register both)
+    #pragma HLS INTERFACE axis register both port=order_stream
+    #pragma HLS INTERFACE axis register both port=incoming_time
+    #pragma HLS INTERFACE axis register both port=incoming_meta
+    #pragma HLS INTERFACE axis register both port=top_bid
+    #pragma HLS INTERFACE axis register both port=top_ask
+    #pragma HLS INTERFACE axis register both port=outgoing_time
+    #pragma HLS INTERFACE axis register both port=outgoing_meta
 
-    //— pipeline the whole function
-#pragma HLS PIPELINE II=1
+    // (4) Top-level pipeline (II = 1)
+    #pragma HLS PIPELINE II=1
 
-    //— dummy orders
+    // (5) Dummy orders
     static order dummy_bid = {0,0,0,0};
     static order dummy_ask = {(ap_fixed<16,8>)255,0,0,0};
 
-    //— the four static heaps
+    // (6) Four static heaps with RESOURCE->RAM_1P_BRAM
     static order bid[LEVELS][CAPACITY/2];
-#pragma HLS ARRAY_PARTITION variable=bid complete dim=1
-#pragma HLS ARRAY_PARTITION variable=bid cyclic factor=4 dim=2
-#pragma HLS DEPENDENCE variable=bid inter false
+    #pragma HLS ARRAY_PARTITION  variable=bid        complete dim=1
+    #pragma HLS ARRAY_PARTITION  variable=bid        cyclic factor=4 dim=2
+    #pragma HLS DEPENDENCE       variable=bid        inter false
+    #pragma HLS RESOURCE        variable=bid        core=RAM_1P_BRAM
 
     static order ask[LEVELS][CAPACITY/2];
-#pragma HLS ARRAY_PARTITION variable=ask complete dim=1
-#pragma HLS ARRAY_PARTITION variable=ask cyclic factor=4 dim=2
-#pragma HLS DEPENDENCE variable=ask inter false
+    #pragma HLS ARRAY_PARTITION  variable=ask        complete dim=1
+    #pragma HLS ARRAY_PARTITION  variable=ask        cyclic factor=4 dim=2
+    #pragma HLS DEPENDENCE       variable=ask        inter false
+    #pragma HLS RESOURCE        variable=ask        core=RAM_1P_BRAM
 
     static order bid_remove[LEVELS][CAPACITY/2];
-#pragma HLS ARRAY_PARTITION variable=bid_remove complete dim=1
-#pragma HLS ARRAY_PARTITION variable=bid_remove cyclic factor=4 dim=2
-#pragma HLS DEPENDENCE variable=bid_remove inter false
+    #pragma HLS ARRAY_PARTITION  variable=bid_remove complete dim=1
+    #pragma HLS ARRAY_PARTITION  variable=bid_remove cyclic factor=4 dim=2
+    #pragma HLS DEPENDENCE       variable=bid_remove inter false
+    #pragma HLS RESOURCE        variable=bid_remove core=RAM_1P_BRAM
 
     static order ask_remove[LEVELS][CAPACITY/2];
-#pragma HLS ARRAY_PARTITION variable=ask_remove complete dim=1
-#pragma HLS ARRAY_PARTITION variable=ask_remove cyclic factor=4 dim=2
-#pragma HLS DEPENDENCE variable=ask_remove inter false
+    #pragma HLS ARRAY_PARTITION  variable=ask_remove complete dim=1
+    #pragma HLS ARRAY_PARTITION  variable=ask_remove cyclic factor=4 dim=2
+    #pragma HLS DEPENDENCE       variable=ask_remove inter false
+    #pragma HLS RESOURCE        variable=ask_remove core=RAM_1P_BRAM
 
     //— counters & holes
     static unsigned counter_bid = 0;
@@ -367,22 +363,21 @@ void order_book(hls::stream<order>    &order_stream,
         Time time_buffer = incoming_time.read();
         metadata meta_buffer = incoming_meta.read();
 
-        //INCOMING LIMITED BID
+        // INCOMING LIMITED BID
         if(input.direction == 3){
-            //Add the incoming input to the bid order book
-            add_bid(bid, input, counter_bid, hole_counter_bid, hole_idx_bid, hole_lvl_bid, top_bid,
-                     top_ask, outgoing_time, outgoing_meta, top_bid_id, top_ask_id,
-                     time_buffer, meta_buffer, ask[0][0], true);
-            //If the book becomes full, discard the last entry
+            // Add the incoming input to the bid order book
+            add_bid(bid, input, counter_bid, hole_counter_bid, hole_idx_bid, hole_lvl_bid,
+                    top_bid, top_ask, outgoing_time, outgoing_meta,
+                    top_bid_id, top_ask_id,
+                    time_buffer, meta_buffer, ask[0][0], true);
+            // If the book becomes full, discard the last entry
             if (counter_bid == CAPACITY-1)
                 counter_bid--;
         }
 
-        //INCOMING REMOVE BID
+        // INCOMING REMOVE BID
         else if (input.direction == 5){
             ap_uint<8> req_size = input.size;
-            //If the incoming order ID is zero, keep removing entries until order size is fulfilled.
-            //After that, make sure the top entry is not arbitrary deleted.
             if(input.orderID == 0){
                 OPEN_BID_REMOVE:
                 while (req_size > 0){
@@ -398,7 +393,6 @@ void order_book(hls::stream<order>    &order_stream,
                     }
                 }
             }
-            //If the incoming order ID is the top entry, remove it.
             else if(input.orderID == bid[0][0].orderID){
                 req_size = bid[0][0].size;
                 remove_bid(bid, req_size, counter_bid, hole_counter_bid, hole_idx_bid, hole_lvl_bid, dummy_bid);
@@ -410,30 +404,27 @@ void order_book(hls::stream<order>    &order_stream,
                     remove_bid(bid_remove, temp_remove, counter_bid_remove, hole_counter_bid_remove, hole_idx_bid_remove, hole_lvl_bid_remove, dummy_bid);
                 }
             }
-            //Otherwise, add the incoming order to the remove heap
-            else{
-                add_bid(bid_remove, input, counter_bid_remove, hole_counter_bid_remove, hole_idx_bid_remove, hole_lvl_bid_remove, top_bid,
-                         top_ask, outgoing_time, outgoing_meta, top_bid_id, top_ask_id,
-                         time_buffer, meta_buffer, ask[0][0], false);
+            else {
+                add_bid(bid_remove, input, counter_bid_remove, hole_counter_bid_remove, hole_idx_bid_remove, hole_lvl_bid_remove,
+                        top_bid, top_ask, outgoing_time, outgoing_meta,
+                        top_bid_id, top_ask_id,
+                        time_buffer, meta_buffer, ask[0][0], false);
             }
         }
 
-        //INCOMING LIMITED ASK
+        // INCOMING LIMITED ASK
         else if(input.direction == 2){
-            //Add the incoming input to the ask order book
-            add_ask(ask, input, counter_ask, hole_counter_ask, hole_idx_ask, hole_lvl_ask, top_bid,
-                    top_ask, outgoing_time, outgoing_meta, top_bid_id, top_ask_id,
+            add_ask(ask, input, counter_ask, hole_counter_ask, hole_idx_ask, hole_lvl_ask,
+                    top_bid, top_ask, outgoing_time, outgoing_meta,
+                    top_bid_id, top_ask_id,
                     time_buffer, meta_buffer, bid[0][0], true);
-            //If the book becomes full, discard the last entry
             if (counter_ask == CAPACITY-1)
                 counter_ask--;
         }
 
-        //INCOMING REMOVE ASK
+        // INCOMING REMOVE ASK
         else if (input.direction == 4){
             ap_uint<8> req_size = input.size;
-            //If the incoming order ID is zero, keep removing entries until order size is fulfilled.
-            //After that, make sure the top entry is not arbitrary deleted.
             if(input.orderID == 0){
                 OPEN_ASK_REMOVE:
                 while (req_size > 0){
@@ -449,7 +440,6 @@ void order_book(hls::stream<order>    &order_stream,
                     }
                 }
             }
-            //If the incoming order ID is the top entry, remove it.
             else if(input.orderID == ask[0][0].orderID){
                 req_size = ask[0][0].size;
                 remove_ask(ask, req_size, counter_ask, hole_counter_ask, hole_idx_ask, hole_lvl_ask, dummy_ask);
@@ -461,11 +451,10 @@ void order_book(hls::stream<order>    &order_stream,
                     remove_ask(ask_remove, temp_remove, counter_ask_remove, hole_counter_ask_remove, hole_idx_ask_remove, hole_lvl_ask_remove, dummy_ask);
                 }
             }
-            //Otherwise, add the incoming order to the remove heap
-            else{
+            else {
                 add_ask(ask_remove, input, counter_ask_remove, hole_counter_ask_remove, hole_idx_ask_remove,
-                        hole_lvl_ask_remove, top_bid,
-                        top_ask, outgoing_time, outgoing_meta, top_bid_id, top_ask_id,
+                        hole_lvl_ask_remove, top_bid, top_ask, outgoing_time, outgoing_meta,
+                        top_bid_id, top_ask_id,
                         time_buffer, meta_buffer, ask[0][0], false);
             }
         }

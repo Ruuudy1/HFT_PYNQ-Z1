@@ -106,7 +106,7 @@ def encodeFASTPacket(orderID,price,quantity,transType):
    ba = ba + bitfieldToByteArray(exp_bf)
    mantissaBytes = endianSwitch( bitfieldToByteArray(man_bf) )
    if len(mantissaBytes) > 3:
-      print "mantissa is too long!"
+      print("mantissa is too long!")
    ba = ba + mantissaBytes
    
    # get size

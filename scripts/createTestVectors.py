@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/env python3
 import random
 import sys
 
@@ -26,7 +26,7 @@ for i in range(1,testSize):
       quantity = int (round (100 * (random.expovariate(1))))
       quantity = quantity if quantity < 255 else 255 # quantity cannot exceed 255
       price    = random.gauss(mu,sigma)
-      print "{0} {1:.2f} {2} {3}".format(orderID,price,quantity,transType)
+      print("{0} {1:.2f} {2} {3}".format(orderID,price,quantity,transType))
       
       existingOrders.append((orderID,price,quantity,transType))
    
@@ -40,5 +40,5 @@ for i in range(1,testSize):
          #print "removing -> " +  str(itemToRemove)
          orderID, _, quantity, transType = itemToRemove
          transType = "RMBID" if transType is "BID" else "RMASK"
-         print "{0} {1:.2f} {2} {3}".format(orderID,101.1,quantity,transType)
+         print("{0} {1:.2f} {2} {3}".format(orderID,101.1,quantity,transType))
    

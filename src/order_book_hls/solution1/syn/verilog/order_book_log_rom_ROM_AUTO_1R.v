@@ -8,9 +8,9 @@ module order_book_log_rom_ROM_AUTO_1R (
     address0, ce0, q0, 
     reset, clk);
 
-parameter DataWidth = 4;
-parameter AddressWidth = 12;
-parameter AddressRange = 4096;
+parameter DataWidth = 3;
+parameter AddressWidth = 7;
+parameter AddressRange = 128;
  
 input[AddressWidth-1:0] address0;
 input ce0;

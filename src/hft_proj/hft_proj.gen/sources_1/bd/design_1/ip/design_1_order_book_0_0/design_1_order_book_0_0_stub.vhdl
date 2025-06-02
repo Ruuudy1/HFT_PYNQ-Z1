@@ -2,10 +2,10 @@
 -- Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
--- Date        : Thu May 29 11:57:14 2025
+-- Date        : Sun Jun  1 15:37:50 2025
 -- Host        : RudyAsus running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode synth_stub
---               c:/Users/ruuud/spring2025/cse145/AAAAHHHH/ECE1373_2016_hft_on_fpga/src/hft_proj/hft_proj.gen/sources_1/bd/design_1/ip/design_1_order_book_0_0/design_1_order_book_0_0_stub.vhdl
+--               c:/Users/ruuud/spring2025/cse145/WORKINGPROJECTIDEA/ECE1373_2016_hft_on_fpga/src/hft_proj/hft_proj.gen/sources_1/bd/design_1/ip/design_1_order_book_0_0/design_1_order_book_0_0_stub.vhdl
 -- Design      : design_1_order_book_0_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7z020clg400-1
@@ -34,22 +34,22 @@ entity design_1_order_book_0_0 is
     s_axi_control_WVALID : in STD_LOGIC;
     ap_clk : in STD_LOGIC;
     ap_rst_n : in STD_LOGIC;
-    order_stream_TDATA : in STD_LOGIC_VECTOR ( 95 downto 0 );
+    order_stream_TDATA : in STD_LOGIC_VECTOR ( 63 downto 0 );
     order_stream_TREADY : out STD_LOGIC;
     order_stream_TVALID : in STD_LOGIC;
-    incoming_time_TDATA : in STD_LOGIC_VECTOR ( 63 downto 0 );
+    incoming_time_TDATA : in STD_LOGIC_VECTOR ( 31 downto 0 );
     incoming_time_TREADY : out STD_LOGIC;
     incoming_time_TVALID : in STD_LOGIC;
     incoming_meta_TDATA : in STD_LOGIC_VECTOR ( 127 downto 0 );
     incoming_meta_TREADY : out STD_LOGIC;
     incoming_meta_TVALID : in STD_LOGIC;
-    top_bid_TDATA : out STD_LOGIC_VECTOR ( 95 downto 0 );
+    top_bid_TDATA : out STD_LOGIC_VECTOR ( 63 downto 0 );
     top_bid_TREADY : in STD_LOGIC;
     top_bid_TVALID : out STD_LOGIC;
-    top_ask_TDATA : out STD_LOGIC_VECTOR ( 95 downto 0 );
+    top_ask_TDATA : out STD_LOGIC_VECTOR ( 63 downto 0 );
     top_ask_TREADY : in STD_LOGIC;
     top_ask_TVALID : out STD_LOGIC;
-    outgoing_time_TDATA : out STD_LOGIC_VECTOR ( 63 downto 0 );
+    outgoing_time_TDATA : out STD_LOGIC_VECTOR ( 31 downto 0 );
     outgoing_time_TREADY : in STD_LOGIC;
     outgoing_time_TVALID : out STD_LOGIC;
     outgoing_meta_TDATA : out STD_LOGIC_VECTOR ( 127 downto 0 );
@@ -60,7 +60,7 @@ entity design_1_order_book_0_0 is
   attribute CHECK_LICENSE_TYPE : string;
   attribute CHECK_LICENSE_TYPE of design_1_order_book_0_0 : entity is "design_1_order_book_0_0,order_book,{}";
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1_order_book_0_0 : entity is "design_1_order_book_0_0,order_book,{x_ipProduct=Vivado 2024.2,x_ipVendor=xilinx.com,x_ipLibrary=hls,x_ipName=order_book,x_ipVersion=1.0,x_ipCoreRevision=2114104178,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_S_AXI_CONTROL_ADDR_WIDTH=6,C_S_AXI_CONTROL_DATA_WIDTH=32}";
+  attribute CORE_GENERATION_INFO of design_1_order_book_0_0 : entity is "design_1_order_book_0_0,order_book,{x_ipProduct=Vivado 2024.2,x_ipVendor=xilinx.com,x_ipLibrary=hls,x_ipName=order_book,x_ipVersion=1.0,x_ipCoreRevision=2114108871,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_S_AXI_CONTROL_ADDR_WIDTH=6,C_S_AXI_CONTROL_DATA_WIDTH=32}";
   attribute DowngradeIPIdentifiedWarnings : string;
   attribute DowngradeIPIdentifiedWarnings of design_1_order_book_0_0 : entity is "yes";
   attribute IP_DEFINITION_SOURCE : string;
@@ -73,7 +73,7 @@ architecture stub of design_1_order_book_0_0 is
   attribute syn_black_box : boolean;
   attribute black_box_pad_pin : string;
   attribute syn_black_box of stub : architecture is true;
-  attribute black_box_pad_pin of stub : architecture is "s_axi_control_ARADDR[5:0],s_axi_control_ARREADY,s_axi_control_ARVALID,s_axi_control_AWADDR[5:0],s_axi_control_AWREADY,s_axi_control_AWVALID,s_axi_control_BREADY,s_axi_control_BRESP[1:0],s_axi_control_BVALID,s_axi_control_RDATA[31:0],s_axi_control_RREADY,s_axi_control_RRESP[1:0],s_axi_control_RVALID,s_axi_control_WDATA[31:0],s_axi_control_WREADY,s_axi_control_WSTRB[3:0],s_axi_control_WVALID,ap_clk,ap_rst_n,order_stream_TDATA[95:0],order_stream_TREADY,order_stream_TVALID,incoming_time_TDATA[63:0],incoming_time_TREADY,incoming_time_TVALID,incoming_meta_TDATA[127:0],incoming_meta_TREADY,incoming_meta_TVALID,top_bid_TDATA[95:0],top_bid_TREADY,top_bid_TVALID,top_ask_TDATA[95:0],top_ask_TREADY,top_ask_TVALID,outgoing_time_TDATA[63:0],outgoing_time_TREADY,outgoing_time_TVALID,outgoing_meta_TDATA[127:0],outgoing_meta_TREADY,outgoing_meta_TVALID";
+  attribute black_box_pad_pin of stub : architecture is "s_axi_control_ARADDR[5:0],s_axi_control_ARREADY,s_axi_control_ARVALID,s_axi_control_AWADDR[5:0],s_axi_control_AWREADY,s_axi_control_AWVALID,s_axi_control_BREADY,s_axi_control_BRESP[1:0],s_axi_control_BVALID,s_axi_control_RDATA[31:0],s_axi_control_RREADY,s_axi_control_RRESP[1:0],s_axi_control_RVALID,s_axi_control_WDATA[31:0],s_axi_control_WREADY,s_axi_control_WSTRB[3:0],s_axi_control_WVALID,ap_clk,ap_rst_n,order_stream_TDATA[63:0],order_stream_TREADY,order_stream_TVALID,incoming_time_TDATA[31:0],incoming_time_TREADY,incoming_time_TVALID,incoming_meta_TDATA[127:0],incoming_meta_TREADY,incoming_meta_TVALID,top_bid_TDATA[63:0],top_bid_TREADY,top_bid_TVALID,top_ask_TDATA[63:0],top_ask_TREADY,top_ask_TVALID,outgoing_time_TDATA[31:0],outgoing_time_TREADY,outgoing_time_TVALID,outgoing_meta_TDATA[127:0],outgoing_meta_TREADY,outgoing_meta_TVALID";
   attribute X_INTERFACE_INFO : string;
   attribute X_INTERFACE_INFO of s_axi_control_ARADDR : signal is "xilinx.com:interface:aximm:1.0 s_axi_control ARADDR";
   attribute X_INTERFACE_MODE : string;
@@ -104,12 +104,12 @@ architecture stub of design_1_order_book_0_0 is
   attribute X_INTERFACE_PARAMETER of ap_rst_n : signal is "XIL_INTERFACENAME ap_rst_n, POLARITY ACTIVE_LOW, INSERT_VIP 0";
   attribute X_INTERFACE_INFO of order_stream_TDATA : signal is "xilinx.com:interface:axis:1.0 order_stream TDATA";
   attribute X_INTERFACE_MODE of order_stream_TDATA : signal is "slave";
-  attribute X_INTERFACE_PARAMETER of order_stream_TDATA : signal is "XIL_INTERFACENAME order_stream, TUSER_WIDTH 0, TDATA_NUM_BYTES 12, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0";
+  attribute X_INTERFACE_PARAMETER of order_stream_TDATA : signal is "XIL_INTERFACENAME order_stream, TUSER_WIDTH 0, TDATA_NUM_BYTES 8, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0";
   attribute X_INTERFACE_INFO of order_stream_TREADY : signal is "xilinx.com:interface:axis:1.0 order_stream TREADY";
   attribute X_INTERFACE_INFO of order_stream_TVALID : signal is "xilinx.com:interface:axis:1.0 order_stream TVALID";
   attribute X_INTERFACE_INFO of incoming_time_TDATA : signal is "xilinx.com:interface:axis:1.0 incoming_time TDATA";
   attribute X_INTERFACE_MODE of incoming_time_TDATA : signal is "slave";
-  attribute X_INTERFACE_PARAMETER of incoming_time_TDATA : signal is "XIL_INTERFACENAME incoming_time, TUSER_WIDTH 0, TDATA_NUM_BYTES 8, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0";
+  attribute X_INTERFACE_PARAMETER of incoming_time_TDATA : signal is "XIL_INTERFACENAME incoming_time, TUSER_WIDTH 0, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0";
   attribute X_INTERFACE_INFO of incoming_time_TREADY : signal is "xilinx.com:interface:axis:1.0 incoming_time TREADY";
   attribute X_INTERFACE_INFO of incoming_time_TVALID : signal is "xilinx.com:interface:axis:1.0 incoming_time TVALID";
   attribute X_INTERFACE_INFO of incoming_meta_TDATA : signal is "xilinx.com:interface:axis:1.0 incoming_meta TDATA";
@@ -119,17 +119,17 @@ architecture stub of design_1_order_book_0_0 is
   attribute X_INTERFACE_INFO of incoming_meta_TVALID : signal is "xilinx.com:interface:axis:1.0 incoming_meta TVALID";
   attribute X_INTERFACE_INFO of top_bid_TDATA : signal is "xilinx.com:interface:axis:1.0 top_bid TDATA";
   attribute X_INTERFACE_MODE of top_bid_TDATA : signal is "master";
-  attribute X_INTERFACE_PARAMETER of top_bid_TDATA : signal is "XIL_INTERFACENAME top_bid, TUSER_WIDTH 0, TDATA_NUM_BYTES 12, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0";
+  attribute X_INTERFACE_PARAMETER of top_bid_TDATA : signal is "XIL_INTERFACENAME top_bid, TUSER_WIDTH 0, TDATA_NUM_BYTES 8, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0";
   attribute X_INTERFACE_INFO of top_bid_TREADY : signal is "xilinx.com:interface:axis:1.0 top_bid TREADY";
   attribute X_INTERFACE_INFO of top_bid_TVALID : signal is "xilinx.com:interface:axis:1.0 top_bid TVALID";
   attribute X_INTERFACE_INFO of top_ask_TDATA : signal is "xilinx.com:interface:axis:1.0 top_ask TDATA";
   attribute X_INTERFACE_MODE of top_ask_TDATA : signal is "master";
-  attribute X_INTERFACE_PARAMETER of top_ask_TDATA : signal is "XIL_INTERFACENAME top_ask, TUSER_WIDTH 0, TDATA_NUM_BYTES 12, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0";
+  attribute X_INTERFACE_PARAMETER of top_ask_TDATA : signal is "XIL_INTERFACENAME top_ask, TUSER_WIDTH 0, TDATA_NUM_BYTES 8, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0";
   attribute X_INTERFACE_INFO of top_ask_TREADY : signal is "xilinx.com:interface:axis:1.0 top_ask TREADY";
   attribute X_INTERFACE_INFO of top_ask_TVALID : signal is "xilinx.com:interface:axis:1.0 top_ask TVALID";
   attribute X_INTERFACE_INFO of outgoing_time_TDATA : signal is "xilinx.com:interface:axis:1.0 outgoing_time TDATA";
   attribute X_INTERFACE_MODE of outgoing_time_TDATA : signal is "master";
-  attribute X_INTERFACE_PARAMETER of outgoing_time_TDATA : signal is "XIL_INTERFACENAME outgoing_time, TUSER_WIDTH 0, TDATA_NUM_BYTES 8, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0";
+  attribute X_INTERFACE_PARAMETER of outgoing_time_TDATA : signal is "XIL_INTERFACENAME outgoing_time, TUSER_WIDTH 0, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0";
   attribute X_INTERFACE_INFO of outgoing_time_TREADY : signal is "xilinx.com:interface:axis:1.0 outgoing_time TREADY";
   attribute X_INTERFACE_INFO of outgoing_time_TVALID : signal is "xilinx.com:interface:axis:1.0 outgoing_time TVALID";
   attribute X_INTERFACE_INFO of outgoing_meta_TDATA : signal is "xilinx.com:interface:axis:1.0 outgoing_meta TDATA";

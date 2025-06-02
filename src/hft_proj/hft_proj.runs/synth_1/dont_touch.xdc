@@ -13,6 +13,9 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_cl
 # IP: bd/design_1/ip/design_1_axi_interconnect_0_imp_xbar_0/design_1_axi_interconnect_0_imp_xbar_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_interconnect_0_imp_xbar_0 || ORIG_REF_NAME==design_1_axi_interconnect_0_imp_xbar_0} -quiet] -quiet
 
+# IP: bd/design_1/ip/design_1_axi_interconnect_0_imp_auto_pc_0/design_1_axi_interconnect_0_imp_auto_pc_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_interconnect_0_imp_auto_pc_0 || ORIG_REF_NAME==design_1_axi_interconnect_0_imp_auto_pc_0} -quiet] -quiet
+
 # IP: bd/design_1/ip/design_1_axi_interconnect_0_0/design_1_axi_interconnect_0_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_interconnect_0_0 || ORIG_REF_NAME==design_1_axi_interconnect_0_0} -quiet] -quiet
 
@@ -34,14 +37,20 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_Mi
 # IP: bd/design_1/ip/design_1_order_data_converter_0/design_1_order_data_converter_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_order_data_converter_0 || ORIG_REF_NAME==design_1_order_data_converter_0} -quiet] -quiet
 
-# IP: bd/design_1/ip/design_1_top_ask_converter_0/design_1_top_ask_converter_0.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_top_ask_converter_0 || ORIG_REF_NAME==design_1_top_ask_converter_0} -quiet] -quiet
-
 # IP: bd/design_1/ip/design_1_top_bid_converter_0/design_1_top_bid_converter_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_top_bid_converter_0 || ORIG_REF_NAME==design_1_top_bid_converter_0} -quiet] -quiet
 
+# IP: bd/design_1/ip/design_1_top_ask_converter_0/design_1_top_ask_converter_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_top_ask_converter_0 || ORIG_REF_NAME==design_1_top_ask_converter_0} -quiet] -quiet
+
 # IP: bd/design_1/ip/design_1_meta_converter_0/design_1_meta_converter_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_meta_converter_0 || ORIG_REF_NAME==design_1_meta_converter_0} -quiet] -quiet
+
+# IP: bd/design_1/ip/design_1_time_converter_in_0/design_1_time_converter_in_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_time_converter_in_0 || ORIG_REF_NAME==design_1_time_converter_in_0} -quiet] -quiet
+
+# IP: bd/design_1/ip/design_1_time_converter_out_0/design_1_time_converter_out_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_time_converter_out_0 || ORIG_REF_NAME==design_1_time_converter_out_0} -quiet] -quiet
 
 # IP: bd/design_1/ip/design_1_order_fifo_0/design_1_order_fifo_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_order_fifo_0 || ORIG_REF_NAME==design_1_order_fifo_0} -quiet] -quiet
@@ -55,9 +64,6 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_ti
 # IP: bd/design_1/ip/design_1_xlconcat_0_0/design_1_xlconcat_0_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_xlconcat_0_0 || ORIG_REF_NAME==design_1_xlconcat_0_0} -quiet] -quiet
 
-# IP: bd/design_1/ip/design_1_axi_interconnect_0_imp_auto_pc_0/design_1_axi_interconnect_0_imp_auto_pc_0.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_interconnect_0_imp_auto_pc_0 || ORIG_REF_NAME==design_1_axi_interconnect_0_imp_auto_pc_0} -quiet] -quiet
+# XDC: c:/Users/ruuud/spring2025/cse145/WORKINGPROJECTIDEA/ECE1373_2016_hft_on_fpga/src/hft_proj/hft_proj.gen/sources_1/bd/design_1/design_1_ooc.xdc
 
-# XDC: c:/Users/ruuud/spring2025/cse145/AAAAHHHH/ECE1373_2016_hft_on_fpga/src/hft_proj/hft_proj.gen/sources_1/bd/design_1/design_1_ooc.xdc
-
-# XDC: C:/Users/ruuud/spring2025/cse145/AAAAHHHH/ECE1373_2016_hft_on_fpga/pynq_z1.xdc
+# XDC: C:/Users/ruuud/spring2025/cse145/WORKINGPROJECTIDEA/ECE1373_2016_hft_on_fpga/pynq_z1.xdc

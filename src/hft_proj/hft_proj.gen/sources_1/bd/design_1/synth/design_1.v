@@ -2,7 +2,7 @@
 //Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-//Date        : Thu May 29 11:43:31 2025
+//Date        : Sun Jun  1 15:33:07 2025
 //Host        : RudyAsus running 64-bit major release  (build 9200)
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -10,7 +10,7 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=21,numReposBlks=17,numNonXlnxBlks=0,numHierBlks=4,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=4,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_ps7_cnt=1,synth_mode=Hierarchical}" *) (* HW_HANDOFF = "design_1.hwdef" *) 
+(* CORE_GENERATION_INFO = "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=23,numReposBlks=19,numNonXlnxBlks=0,numHierBlks=4,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=4,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_ps7_cnt=1,synth_mode=Hierarchical}" *) (* HW_HANDOFF = "design_1.hwdef" *) 
 module design_1
    (DDR_addr,
     DDR_ba,
@@ -126,26 +126,27 @@ module design_1
   wire fast_protocol_0_time_to_book_TREADY;
   wire fast_protocol_0_time_to_book_TVALID;
   wire [3:0]led_l;
-  wire [95:0]meta_converter_M_AXIS_TDATA;
+  wire [63:0]meta_converter_M_AXIS_TDATA;
   wire meta_converter_M_AXIS_TREADY;
   wire meta_converter_M_AXIS_TVALID;
   wire [127:0]order_book_0_outgoing_meta_TDATA;
   wire order_book_0_outgoing_meta_TREADY;
   wire order_book_0_outgoing_meta_TVALID;
-  wire [63:0]order_book_0_outgoing_time_TDATA;
+  wire [31:0]order_book_0_outgoing_time_TDATA;
   wire order_book_0_outgoing_time_TREADY;
   wire order_book_0_outgoing_time_TVALID;
-  wire [95:0]order_book_0_top_ask_TDATA;
+  wire [63:0]order_book_0_top_ask_TDATA;
   wire order_book_0_top_ask_TREADY;
   wire order_book_0_top_ask_TVALID;
-  wire [95:0]order_book_0_top_bid_TDATA;
+  wire [63:0]order_book_0_top_bid_TDATA;
   wire order_book_0_top_bid_TREADY;
   wire order_book_0_top_bid_TVALID;
-  wire [95:0]order_data_converter_M_AXIS_TDATA;
+  wire [47:0]order_data_converter_M_AXIS_TDATA;
   wire order_data_converter_M_AXIS_TREADY;
   wire order_data_converter_M_AXIS_TVALID;
   wire [0:0]proc_sys_reset_0_interconnect_aresetn;
   wire [0:0]proc_sys_reset_0_peripheral_aresetn;
+  wire [0:0]proc_sys_reset_0_peripheral_reset;
   wire processing_system7_0_FCLK_CLK0;
   wire processing_system7_0_FCLK_RESET0_N;
   wire [31:0]processing_system7_0_M_AXI_GP0_ARADDR;
@@ -195,12 +196,19 @@ module design_1
   wire [63:0]simple_threshold_0_outgoing_time_TDATA;
   wire simple_threshold_0_outgoing_time_TREADY;
   wire simple_threshold_0_outgoing_time_TVALID;
-  wire [63:0]top_ask_converter_M_AXIS_TDATA;
+  wire [31:0]time_converter_in_M_AXIS_TDATA;
+  wire time_converter_in_M_AXIS_TREADY;
+  wire time_converter_in_M_AXIS_TVALID;
+  wire [31:0]time_converter_out_M_AXIS_TDATA;
+  wire time_converter_out_M_AXIS_TREADY;
+  wire time_converter_out_M_AXIS_TVALID;
+  wire [31:0]top_ask_converter_M_AXIS_TDATA;
   wire top_ask_converter_M_AXIS_TREADY;
   wire top_ask_converter_M_AXIS_TVALID;
-  wire [63:0]top_bid_converter_M_AXIS_TDATA;
+  wire [31:0]top_bid_converter_M_AXIS_TDATA;
   wire top_bid_converter_M_AXIS_TREADY;
   wire top_bid_converter_M_AXIS_TVALID;
+  wire user_sw_l;
 
   design_1_MicroblazeToSwitch_0_0 MicroblazeToSwitch_0
        (.ap_clk(clk_wiz_0_clk_out1),
@@ -347,7 +355,7 @@ module design_1
         .m_axis_tdata(meta_converter_M_AXIS_TDATA),
         .m_axis_tready(meta_converter_M_AXIS_TREADY),
         .m_axis_tvalid(meta_converter_M_AXIS_TVALID),
-        .s_axis_tdata(order_book_0_outgoing_meta_TDATA),
+        .s_axis_tdata(order_book_0_outgoing_meta_TDATA[95:0]),
         .s_axis_tready(order_book_0_outgoing_meta_TREADY),
         .s_axis_tvalid(order_book_0_outgoing_meta_TVALID));
   design_1_meta_fifo_0 meta_fifo
@@ -363,10 +371,10 @@ module design_1
         .incoming_meta_TDATA(fast_protocol_0_metadata_to_book_TDATA),
         .incoming_meta_TREADY(fast_protocol_0_metadata_to_book_TREADY),
         .incoming_meta_TVALID(fast_protocol_0_metadata_to_book_TVALID),
-        .incoming_time_TDATA(fast_protocol_0_time_to_book_TDATA),
-        .incoming_time_TREADY(fast_protocol_0_time_to_book_TREADY),
-        .incoming_time_TVALID(fast_protocol_0_time_to_book_TVALID),
-        .order_stream_TDATA(order_data_converter_M_AXIS_TDATA),
+        .incoming_time_TDATA(time_converter_in_M_AXIS_TDATA),
+        .incoming_time_TREADY(time_converter_in_M_AXIS_TREADY),
+        .incoming_time_TVALID(time_converter_in_M_AXIS_TVALID),
+        .order_stream_TDATA({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,order_data_converter_M_AXIS_TDATA}),
         .order_stream_TREADY(order_data_converter_M_AXIS_TREADY),
         .order_stream_TVALID(order_data_converter_M_AXIS_TVALID),
         .outgoing_meta_TDATA(order_book_0_outgoing_meta_TDATA),
@@ -404,7 +412,7 @@ module design_1
         .m_axis_tdata(order_data_converter_M_AXIS_TDATA),
         .m_axis_tready(order_data_converter_M_AXIS_TREADY),
         .m_axis_tvalid(order_data_converter_M_AXIS_TVALID),
-        .s_axis_tdata(fast_protocol_0_order_to_book_TDATA),
+        .s_axis_tdata(fast_protocol_0_order_to_book_TDATA[31:0]),
         .s_axis_tready(fast_protocol_0_order_to_book_TREADY),
         .s_axis_tvalid(fast_protocol_0_order_to_book_TVALID));
   design_1_order_fifo_0 order_fifo
@@ -421,6 +429,7 @@ module design_1
         .interconnect_aresetn(proc_sys_reset_0_interconnect_aresetn),
         .mb_debug_sys_rst(1'b0),
         .peripheral_aresetn(proc_sys_reset_0_peripheral_aresetn),
+        .peripheral_reset(proc_sys_reset_0_peripheral_reset),
         .slowest_sync_clk(clk_wiz_0_clk_out1));
   design_1_processing_system7_0_0 processing_system7_0
        (.DDR_Addr(DDR_addr),
@@ -518,12 +527,12 @@ module design_1
   design_1_simple_threshold_0_0 simple_threshold_0
        (.ap_clk(clk_wiz_0_clk_out1),
         .ap_rst_n(proc_sys_reset_0_peripheral_aresetn),
-        .incoming_meta_TDATA(meta_converter_M_AXIS_TDATA),
+        .incoming_meta_TDATA({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,meta_converter_M_AXIS_TDATA}),
         .incoming_meta_TREADY(meta_converter_M_AXIS_TREADY),
         .incoming_meta_TVALID(meta_converter_M_AXIS_TVALID),
-        .incoming_time_TDATA(order_book_0_outgoing_time_TDATA),
-        .incoming_time_TREADY(order_book_0_outgoing_time_TREADY),
-        .incoming_time_TVALID(order_book_0_outgoing_time_TVALID),
+        .incoming_time_TDATA({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,time_converter_out_M_AXIS_TDATA}),
+        .incoming_time_TREADY(time_converter_out_M_AXIS_TREADY),
+        .incoming_time_TVALID(time_converter_out_M_AXIS_TVALID),
         .outgoing_meta_TDATA(simple_threshold_0_outgoing_meta_TDATA),
         .outgoing_meta_TREADY(simple_threshold_0_outgoing_meta_TREADY),
         .outgoing_meta_TVALID(simple_threshold_0_outgoing_meta_TVALID),
@@ -533,12 +542,30 @@ module design_1
         .outgoing_time_TDATA(simple_threshold_0_outgoing_time_TDATA),
         .outgoing_time_TREADY(simple_threshold_0_outgoing_time_TREADY),
         .outgoing_time_TVALID(simple_threshold_0_outgoing_time_TVALID),
-        .top_ask_TDATA(top_ask_converter_M_AXIS_TDATA),
+        .top_ask_TDATA({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,top_ask_converter_M_AXIS_TDATA}),
         .top_ask_TREADY(top_ask_converter_M_AXIS_TREADY),
         .top_ask_TVALID(top_ask_converter_M_AXIS_TVALID),
-        .top_bid_TDATA({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,top_bid_converter_M_AXIS_TDATA}),
+        .top_bid_TDATA({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,top_bid_converter_M_AXIS_TDATA}),
         .top_bid_TREADY(top_bid_converter_M_AXIS_TREADY),
         .top_bid_TVALID(top_bid_converter_M_AXIS_TVALID));
+  design_1_time_converter_in_0 time_converter_in
+       (.aclk(clk_wiz_0_clk_out1),
+        .aresetn(proc_sys_reset_0_peripheral_aresetn),
+        .m_axis_tdata(time_converter_in_M_AXIS_TDATA),
+        .m_axis_tready(time_converter_in_M_AXIS_TREADY),
+        .m_axis_tvalid(time_converter_in_M_AXIS_TVALID),
+        .s_axis_tdata(fast_protocol_0_time_to_book_TDATA[31:0]),
+        .s_axis_tready(fast_protocol_0_time_to_book_TREADY),
+        .s_axis_tvalid(fast_protocol_0_time_to_book_TVALID));
+  design_1_time_converter_out_0 time_converter_out
+       (.aclk(clk_wiz_0_clk_out1),
+        .aresetn(proc_sys_reset_0_peripheral_aresetn),
+        .m_axis_tdata(time_converter_out_M_AXIS_TDATA),
+        .m_axis_tready(time_converter_out_M_AXIS_TREADY),
+        .m_axis_tvalid(time_converter_out_M_AXIS_TVALID),
+        .s_axis_tdata(order_book_0_outgoing_time_TDATA),
+        .s_axis_tready(order_book_0_outgoing_time_TREADY),
+        .s_axis_tvalid(order_book_0_outgoing_time_TVALID));
   design_1_time_fifo_0 time_fifo
        (.m_axis_tready(1'b1),
         .s_axis_aclk(clk_wiz_0_clk_out1),
@@ -552,7 +579,7 @@ module design_1
         .m_axis_tdata(top_ask_converter_M_AXIS_TDATA),
         .m_axis_tready(top_ask_converter_M_AXIS_TREADY),
         .m_axis_tvalid(top_ask_converter_M_AXIS_TVALID),
-        .s_axis_tdata(order_book_0_top_ask_TDATA),
+        .s_axis_tdata(order_book_0_top_ask_TDATA[47:0]),
         .s_axis_tready(order_book_0_top_ask_TREADY),
         .s_axis_tvalid(order_book_0_top_ask_TVALID));
   design_1_top_bid_converter_0 top_bid_converter
@@ -561,14 +588,14 @@ module design_1
         .m_axis_tdata(top_bid_converter_M_AXIS_TDATA),
         .m_axis_tready(top_bid_converter_M_AXIS_TREADY),
         .m_axis_tvalid(top_bid_converter_M_AXIS_TVALID),
-        .s_axis_tdata(order_book_0_top_bid_TDATA),
+        .s_axis_tdata(order_book_0_top_bid_TDATA[47:0]),
         .s_axis_tready(order_book_0_top_bid_TREADY),
         .s_axis_tvalid(order_book_0_top_bid_TVALID));
   design_1_xlconcat_0_0 xlconcat_0
        (.In0(proc_sys_reset_0_peripheral_aresetn),
         .In1(clk_wiz_0_locked),
-        .In2(1'b0),
-        .In3(1'b0),
+        .In2(user_sw_l),
+        .In3(proc_sys_reset_0_peripheral_reset),
         .dout(led_l));
 endmodule
 

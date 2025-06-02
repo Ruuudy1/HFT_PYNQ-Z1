@@ -16,62 +16,17 @@ if {${::AESL::PGuard_rtl_comp_handler}} {
 
 
 if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_1247bkb BINDTYPE {storage} TYPE {ram} IMPL {auto} LATENCY 2 ALLOW_PRAGMA 1
+	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_727_bkb BINDTYPE {storage} TYPE {ram_1p} IMPL {bram} LATENCY 2 ALLOW_PRAGMA 1
 }
 
 
 if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_1295cud BINDTYPE {storage} TYPE {ram} IMPL {auto} LATENCY 2 ALLOW_PRAGMA 1
+	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_755_cud BINDTYPE {storage} TYPE {ram_1p} IMPL {bram} LATENCY 2 ALLOW_PRAGMA 1
 }
 
 
 if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_1199dEe BINDTYPE {storage} TYPE {ram} IMPL {auto} LATENCY 2 ALLOW_PRAGMA 1
-}
-
-
-if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_1151eOg BINDTYPE {storage} TYPE {ram} IMPL {auto} LATENCY 2 ALLOW_PRAGMA 1
-}
-
-
-if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_1296fYi BINDTYPE {storage} TYPE {ram} IMPL {auto} LATENCY 2 ALLOW_PRAGMA 1
-}
-
-
-if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_1200WhU BINDTYPE {storage} TYPE {ram} IMPL {auto} LATENCY 2 ALLOW_PRAGMA 1
-}
-
-
-if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_1152bDo BINDTYPE {storage} TYPE {ram} IMPL {auto} LATENCY 2 ALLOW_PRAGMA 1
-}
-
-
-if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_1248ckv BINDTYPE {storage} TYPE {ram} IMPL {auto} LATENCY 2 ALLOW_PRAGMA 1
-}
-
-
-if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_1255c1C BINDTYPE {storage} TYPE {ram} IMPL {auto} LATENCY 2 ALLOW_PRAGMA 1
-}
-
-
-if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_1303c2C BINDTYPE {storage} TYPE {ram} IMPL {auto} LATENCY 2 ALLOW_PRAGMA 1
-}
-
-
-if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_1207c3C BINDTYPE {storage} TYPE {ram} IMPL {auto} LATENCY 2 ALLOW_PRAGMA 1
-}
-
-
-if {${::AESL::PGuard_rtl_comp_handler}} {
-	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_1159c4D BINDTYPE {storage} TYPE {ram} IMPL {auto} LATENCY 2 ALLOW_PRAGMA 1
+	::AP::rtl_comp_handler order_book_order_book_stream_stream_stream_stream_stream_stream_stream_ap_uint_ap_u_671_eOg BINDTYPE {storage} TYPE {ram_1p} IMPL {bram} LATENCY 2 ALLOW_PRAGMA 1
 }
 
 
@@ -108,7 +63,7 @@ dict set axilite_register_dict control $port_control
 if {${::AESL::PGuard_simmodel_gen}} {
 	if {[info proc ::AESL_LIB_XILADAPTER::s_axilite_gen] == "::AESL_LIB_XILADAPTER::s_axilite_gen"} {
 		eval "::AESL_LIB_XILADAPTER::s_axilite_gen { \
-			id 969 \
+			id 558 \
 			corename order_book_control_axilite \
 			name order_book_control_s_axi \
 			ports {$port_control} \
@@ -132,14 +87,14 @@ if {${::AESL::PGuard_rtl_comp_handler}} {
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc ::AESL_LIB_XILADAPTER::native_axis_add] == "::AESL_LIB_XILADAPTER::native_axis_add"} {
 eval "::AESL_LIB_XILADAPTER::native_axis_add { \
-    id 970 \
+    id 559 \
     name order_stream \
     reset_level 0 \
     sync_rst true \
     corename {} \
     metadata {  } \
     op interface \
-    ports { order_stream_TDATA { I 96 vector } order_stream_TVALID { I 1 bit } order_stream_TREADY { O 1 bit } } \
+    ports { order_stream_TDATA { I 64 vector } order_stream_TVALID { I 1 bit } order_stream_TREADY { O 1 bit } } \
 } "
 } else {
 puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'order_stream'"
@@ -151,14 +106,14 @@ puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored ge
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc ::AESL_LIB_XILADAPTER::native_axis_add] == "::AESL_LIB_XILADAPTER::native_axis_add"} {
 eval "::AESL_LIB_XILADAPTER::native_axis_add { \
-    id 971 \
+    id 560 \
     name incoming_time \
     reset_level 0 \
     sync_rst true \
     corename {} \
     metadata {  } \
     op interface \
-    ports { incoming_time_TDATA { I 64 vector } incoming_time_TVALID { I 1 bit } incoming_time_TREADY { O 1 bit } } \
+    ports { incoming_time_TDATA { I 32 vector } incoming_time_TVALID { I 1 bit } incoming_time_TREADY { O 1 bit } } \
 } "
 } else {
 puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'incoming_time'"
@@ -170,7 +125,7 @@ puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored ge
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc ::AESL_LIB_XILADAPTER::native_axis_add] == "::AESL_LIB_XILADAPTER::native_axis_add"} {
 eval "::AESL_LIB_XILADAPTER::native_axis_add { \
-    id 972 \
+    id 561 \
     name incoming_meta \
     reset_level 0 \
     sync_rst true \
@@ -189,14 +144,14 @@ puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored ge
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc ::AESL_LIB_XILADAPTER::native_axis_add] == "::AESL_LIB_XILADAPTER::native_axis_add"} {
 eval "::AESL_LIB_XILADAPTER::native_axis_add { \
-    id 973 \
+    id 562 \
     name top_bid \
     reset_level 0 \
     sync_rst true \
     corename {} \
     metadata {  } \
     op interface \
-    ports { top_bid_TDATA { O 96 vector } top_bid_TVALID { O 1 bit } top_bid_TREADY { I 1 bit } } \
+    ports { top_bid_TDATA { O 64 vector } top_bid_TVALID { O 1 bit } top_bid_TREADY { I 1 bit } } \
 } "
 } else {
 puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'top_bid'"
@@ -208,14 +163,14 @@ puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored ge
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc ::AESL_LIB_XILADAPTER::native_axis_add] == "::AESL_LIB_XILADAPTER::native_axis_add"} {
 eval "::AESL_LIB_XILADAPTER::native_axis_add { \
-    id 974 \
+    id 563 \
     name top_ask \
     reset_level 0 \
     sync_rst true \
     corename {} \
     metadata {  } \
     op interface \
-    ports { top_ask_TDATA { O 96 vector } top_ask_TVALID { O 1 bit } top_ask_TREADY { I 1 bit } } \
+    ports { top_ask_TDATA { O 64 vector } top_ask_TVALID { O 1 bit } top_ask_TREADY { I 1 bit } } \
 } "
 } else {
 puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'top_ask'"
@@ -227,14 +182,14 @@ puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored ge
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc ::AESL_LIB_XILADAPTER::native_axis_add] == "::AESL_LIB_XILADAPTER::native_axis_add"} {
 eval "::AESL_LIB_XILADAPTER::native_axis_add { \
-    id 975 \
+    id 564 \
     name outgoing_time \
     reset_level 0 \
     sync_rst true \
     corename {} \
     metadata {  } \
     op interface \
-    ports { outgoing_time_TDATA { O 64 vector } outgoing_time_TVALID { O 1 bit } outgoing_time_TREADY { I 1 bit } } \
+    ports { outgoing_time_TDATA { O 32 vector } outgoing_time_TVALID { O 1 bit } outgoing_time_TREADY { I 1 bit } } \
 } "
 } else {
 puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored generation of bus interface for 'outgoing_time'"
@@ -246,7 +201,7 @@ puts "@W \[IMPL-110\] Cannot find bus interface model in the library. Ignored ge
 if {${::AESL::PGuard_autoexp_gen}} {
 if {[info proc ::AESL_LIB_XILADAPTER::native_axis_add] == "::AESL_LIB_XILADAPTER::native_axis_add"} {
 eval "::AESL_LIB_XILADAPTER::native_axis_add { \
-    id 976 \
+    id 565 \
     name outgoing_meta \
     reset_level 0 \
     sync_rst true \

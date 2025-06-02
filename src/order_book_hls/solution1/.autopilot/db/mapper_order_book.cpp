@@ -257,37 +257,37 @@ static AESL_RUNTIME_BC __xlx_outgoing_time_V_size_Reader("../tv/stream_size/stre
 unsigned int ap_apatb_outgoing_meta_cap_bc;
 static AESL_RUNTIME_BC __xlx_outgoing_meta_V_size_Reader("../tv/stream_size/stream_size_out_outgoing_meta.dat");
 using hls::sim::Byte;
-struct __cosim_s12__ { char data[12]; };
+struct __cosim_s8__ { char data[8]; };
 struct __cosim_s16__ { char data[16]; };
-extern "C" void order_book(__cosim_s12__*, long long*, __cosim_s16__*, __cosim_s12__*, __cosim_s12__*, long long*, __cosim_s16__*, volatile void *, volatile void *);
+extern "C" void order_book(__cosim_s8__*, int*, __cosim_s16__*, __cosim_s8__*, __cosim_s8__*, int*, __cosim_s16__*, volatile void *, volatile void *);
 extern "C" void apatb_order_book_hw(volatile void * __xlx_apatb_param_order_stream, volatile void * __xlx_apatb_param_incoming_time, volatile void * __xlx_apatb_param_incoming_meta, volatile void * __xlx_apatb_param_top_bid, volatile void * __xlx_apatb_param_top_ask, volatile void * __xlx_apatb_param_outgoing_time, volatile void * __xlx_apatb_param_outgoing_meta, volatile void * __xlx_apatb_param_top_bid_id, volatile void * __xlx_apatb_param_top_ask_id) {
 using hls::sim::createStream;
-auto* sorder_stream = createStream((hls::stream<__cosim_s12__>*)__xlx_apatb_param_order_stream);
-auto* sincoming_time = createStream((hls::stream<long long>*)__xlx_apatb_param_incoming_time);
+auto* sorder_stream = createStream((hls::stream<__cosim_s8__>*)__xlx_apatb_param_order_stream);
+auto* sincoming_time = createStream((hls::stream<int>*)__xlx_apatb_param_incoming_time);
 auto* sincoming_meta = createStream((hls::stream<__cosim_s16__>*)__xlx_apatb_param_incoming_meta);
   //Create input buffer for top_bid
   ap_apatb_top_bid_cap_bc = __xlx_top_bid_V_size_Reader.read_size();
-  __cosim_s12__* __xlx_top_bid_input_buffer= new __cosim_s12__[ap_apatb_top_bid_cap_bc];
-auto* stop_bid = createStream((hls::stream<__cosim_s12__>*)__xlx_apatb_param_top_bid);
+  __cosim_s8__* __xlx_top_bid_input_buffer= new __cosim_s8__[ap_apatb_top_bid_cap_bc];
+auto* stop_bid = createStream((hls::stream<__cosim_s8__>*)__xlx_apatb_param_top_bid);
   //Create input buffer for top_ask
   ap_apatb_top_ask_cap_bc = __xlx_top_ask_V_size_Reader.read_size();
-  __cosim_s12__* __xlx_top_ask_input_buffer= new __cosim_s12__[ap_apatb_top_ask_cap_bc];
-auto* stop_ask = createStream((hls::stream<__cosim_s12__>*)__xlx_apatb_param_top_ask);
+  __cosim_s8__* __xlx_top_ask_input_buffer= new __cosim_s8__[ap_apatb_top_ask_cap_bc];
+auto* stop_ask = createStream((hls::stream<__cosim_s8__>*)__xlx_apatb_param_top_ask);
   //Create input buffer for outgoing_time
   ap_apatb_outgoing_time_cap_bc = __xlx_outgoing_time_V_size_Reader.read_size();
-  long long* __xlx_outgoing_time_input_buffer= new long long[ap_apatb_outgoing_time_cap_bc];
-auto* soutgoing_time = createStream((hls::stream<long long>*)__xlx_apatb_param_outgoing_time);
+  int* __xlx_outgoing_time_input_buffer= new int[ap_apatb_outgoing_time_cap_bc];
+auto* soutgoing_time = createStream((hls::stream<int>*)__xlx_apatb_param_outgoing_time);
   //Create input buffer for outgoing_meta
   ap_apatb_outgoing_meta_cap_bc = __xlx_outgoing_meta_V_size_Reader.read_size();
   __cosim_s16__* __xlx_outgoing_meta_input_buffer= new __cosim_s16__[ap_apatb_outgoing_meta_cap_bc];
 auto* soutgoing_meta = createStream((hls::stream<__cosim_s16__>*)__xlx_apatb_param_outgoing_meta);
   // DUT call
-  order_book(sorder_stream->data<__cosim_s12__>(), sincoming_time->data<long long>(), sincoming_meta->data<__cosim_s16__>(), stop_bid->data<__cosim_s12__>(), stop_ask->data<__cosim_s12__>(), soutgoing_time->data<long long>(), soutgoing_meta->data<__cosim_s16__>(), __xlx_apatb_param_top_bid_id, __xlx_apatb_param_top_ask_id);
-sorder_stream->transfer((hls::stream<__cosim_s12__>*)__xlx_apatb_param_order_stream);
-sincoming_time->transfer((hls::stream<long long>*)__xlx_apatb_param_incoming_time);
+  order_book(sorder_stream->data<__cosim_s8__>(), sincoming_time->data<int>(), sincoming_meta->data<__cosim_s16__>(), stop_bid->data<__cosim_s8__>(), stop_ask->data<__cosim_s8__>(), soutgoing_time->data<int>(), soutgoing_meta->data<__cosim_s16__>(), __xlx_apatb_param_top_bid_id, __xlx_apatb_param_top_ask_id);
+sorder_stream->transfer((hls::stream<__cosim_s8__>*)__xlx_apatb_param_order_stream);
+sincoming_time->transfer((hls::stream<int>*)__xlx_apatb_param_incoming_time);
 sincoming_meta->transfer((hls::stream<__cosim_s16__>*)__xlx_apatb_param_incoming_meta);
-stop_bid->transfer((hls::stream<__cosim_s12__>*)__xlx_apatb_param_top_bid);
-stop_ask->transfer((hls::stream<__cosim_s12__>*)__xlx_apatb_param_top_ask);
-soutgoing_time->transfer((hls::stream<long long>*)__xlx_apatb_param_outgoing_time);
+stop_bid->transfer((hls::stream<__cosim_s8__>*)__xlx_apatb_param_top_bid);
+stop_ask->transfer((hls::stream<__cosim_s8__>*)__xlx_apatb_param_top_ask);
+soutgoing_time->transfer((hls::stream<int>*)__xlx_apatb_param_outgoing_time);
 soutgoing_meta->transfer((hls::stream<__cosim_s16__>*)__xlx_apatb_param_outgoing_meta);
 }

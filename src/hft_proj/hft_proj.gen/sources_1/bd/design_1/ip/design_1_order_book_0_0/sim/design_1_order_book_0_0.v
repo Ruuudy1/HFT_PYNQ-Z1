@@ -48,7 +48,7 @@
 
 
 // IP VLNV: xilinx.com:hls:order_book:1.0
-// IP Revision: 2114104178
+// IP Revision: 2114108871
 
 `timescale 1ns/1ps
 
@@ -144,16 +144,16 @@ input wire ap_clk;
 input wire ap_rst_n;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 order_stream TDATA" *)
 (* X_INTERFACE_MODE = "slave" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME order_stream, TUSER_WIDTH 0, TDATA_NUM_BYTES 12, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
-input wire [95 : 0] order_stream_TDATA;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME order_stream, TUSER_WIDTH 0, TDATA_NUM_BYTES 8, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
+input wire [63 : 0] order_stream_TDATA;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 order_stream TREADY" *)
 output wire order_stream_TREADY;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 order_stream TVALID" *)
 input wire order_stream_TVALID;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 incoming_time TDATA" *)
 (* X_INTERFACE_MODE = "slave" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME incoming_time, TUSER_WIDTH 0, TDATA_NUM_BYTES 8, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
-input wire [63 : 0] incoming_time_TDATA;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME incoming_time, TUSER_WIDTH 0, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
+input wire [31 : 0] incoming_time_TDATA;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 incoming_time TREADY" *)
 output wire incoming_time_TREADY;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 incoming_time TVALID" *)
@@ -168,24 +168,24 @@ output wire incoming_meta_TREADY;
 input wire incoming_meta_TVALID;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 top_bid TDATA" *)
 (* X_INTERFACE_MODE = "master" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME top_bid, TUSER_WIDTH 0, TDATA_NUM_BYTES 12, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
-output wire [95 : 0] top_bid_TDATA;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME top_bid, TUSER_WIDTH 0, TDATA_NUM_BYTES 8, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
+output wire [63 : 0] top_bid_TDATA;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 top_bid TREADY" *)
 input wire top_bid_TREADY;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 top_bid TVALID" *)
 output wire top_bid_TVALID;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 top_ask TDATA" *)
 (* X_INTERFACE_MODE = "master" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME top_ask, TUSER_WIDTH 0, TDATA_NUM_BYTES 12, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
-output wire [95 : 0] top_ask_TDATA;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME top_ask, TUSER_WIDTH 0, TDATA_NUM_BYTES 8, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
+output wire [63 : 0] top_ask_TDATA;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 top_ask TREADY" *)
 input wire top_ask_TREADY;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 top_ask TVALID" *)
 output wire top_ask_TVALID;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 outgoing_time TDATA" *)
 (* X_INTERFACE_MODE = "master" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME outgoing_time, TUSER_WIDTH 0, TDATA_NUM_BYTES 8, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
-output wire [63 : 0] outgoing_time_TDATA;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME outgoing_time, TUSER_WIDTH 0, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_0_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
+output wire [31 : 0] outgoing_time_TDATA;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 outgoing_time TREADY" *)
 input wire outgoing_time_TREADY;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 outgoing_time TVALID" *)
