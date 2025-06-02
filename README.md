@@ -9,8 +9,11 @@ Based on: ECE1373 Course Project - High Frequency Trading
 ##### It was also missing: src/hft_proj, the meat of the project, which ties all the custom IPs together 
 ##### I maintained the repository, optimized it, removed huge #define <math.h> import overhead, and build custom "glue" to merge the IP's together 
 ##### Rewrote likely 10 year old syntax 
-##### TODO: running into resource over-utilization, I will truncate the implementation of the order book (biggest part of the project) 
-##### TODO: Try to move to a bigger board later 
+#### WORKING BITSTREAM IMPLMENTATION ON PYNQ-Z1/Z2 BOARDS!
+##### FIXED resource over-utilization; order book 4096 BID + 4096 ASK -> 128 BID + 128 ASK (still ideal for popular HFT strats: *Market Making*, *Momentum Trading*, etc)    
+##### REWROTE: Original repo was built on Python 2 which uses Tkinter package that PYNQ’s Debian image no longer provides
+##### REWROTE: All scripts/ python files to work with Python3 
+##### TODO: Full comprehensive guide to set this up coming soon
 
 Dropped Order book from 4096 bid + 4096 asks -> 128 bid -> 128 asks
 Corrected data width converters to match your optimized data structures:
